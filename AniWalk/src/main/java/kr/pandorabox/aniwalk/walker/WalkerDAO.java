@@ -28,4 +28,5 @@ public interface WalkerDAO {
 	public List<String> certificateImg(String wk_id);
 	public List<WalkerDTO> getWalkerList(String searchWalker);
 	public int emailCheck(String email);
+	
 }

@@ -11,7 +11,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import kr.pandorabox.aniwalk.FileUploadLogic;
@@ -32,6 +31,7 @@ public class MemberController {
 	@RequestMapping("/loginPro.do")
 	public ModelAndView checkMember(int kakao_id, HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView();
+		System.out.println("Hello java11 upgrade");
 		
 		// 넘겨받은 카카오 id를 통해 aniwalk 서비스에 가입되어 있는 아이디인지 체크 하는 메소드
 		String mem_nickname = memberService.joinCheck(kakao_id);
