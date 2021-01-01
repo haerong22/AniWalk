@@ -1,0 +1,26 @@
+.main-nav{
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+}
+.main-nav__logo{
+    width: 120px;
+    height: 100px;
+    position: relative;
+    top: -23px;
+    left: -10px;
+}
+.main-nav__list{
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+    margin: 16px 100px auto auto;
+}
+.main-nav__list-items{
+    margin: auto 30px;
+    font-size: 1.8rem;
+}
+.main-nav__list-items:hover{
+    cursor: pointer;
+}

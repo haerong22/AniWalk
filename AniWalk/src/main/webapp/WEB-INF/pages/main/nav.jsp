@@ -8,14 +8,14 @@
 </head>
 <body>
 <div class="main-nav">
-	<img src="${pageContext.request.contextPath}/images/main_logo.png" alt="">
+	<img class="main-nav__logo" src="${pageContext.request.contextPath}/images/main_logo.png" alt="">
 
-	<ul class="nav-ul">
-		<li><a href="/aniwalk/index.do">Home</a></li>
-		<li>사용방법</li>
-		<li>사용후기</li>
-		<li><a href="/aniwalk/walker/index.do">프렌즈 Login</a></li>
-		<li><a href="/aniwalk/walkerApply.do">프렌즈 신청</a></li>
+	<ul class="main-nav__list">
+		<li class="main-nav__list-items"><a href="/aniwalk/index.do">Home</a></li>
+		<li class="main-nav__list-items"><a href="#">사용방법</a></li>
+		<li class="main-nav__list-items"><a href="#">사용후기</a></li>
+		<li class="main-nav__list-items"><a href="/aniwalk/walker/index.do">프렌즈 Login</a></li>
+		<li class="main-nav__list-items"><a href="/aniwalk/walkerApply.do">프렌즈 신청</a></li>
 	</ul>
 </div>
 
