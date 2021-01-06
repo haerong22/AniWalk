@@ -1,0 +1,32 @@
+.index-bg{
+	position: relative;
+	height: 57vw;
+}
+.index-bg .index-bg__img{
+	width: 100%;
+	height: 95%;
+	position: absolute;
+}
+
+.loginBox{
+    width: 300px;
+    height: 350px;
+    background: var(--light-green-opacity);
+    color: var(--white);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+	
+	z-index: 10;
+    position: absolute;
+    top: 33%;
+    right: 8%;
+}
+.loginBox label{
+    font-size: 2rem;
+}
+.loginBox button{
+    display: block;
+    margin-top: 30px;
+}

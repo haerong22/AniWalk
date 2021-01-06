@@ -16,13 +16,7 @@
 <!-- js -->
 <script src="/aniwalk/static/js/main.js"></script>
 
-<style>
-	.absolute-position{
-		position: absolute;
-		bottom: 0;
-		left: 0;
-	}
-</style>
+
 <body>
 	<nav>
 		<tiles:insertAttribute name="nav"></tiles:insertAttribute>
@@ -30,7 +24,27 @@
 	<article>
 		<tiles:insertAttribute name="content"></tiles:insertAttribute>
 	</article>
-	<footer class="absolute-position"> Copyright@ PandoraBox Web / App Project </footer>
+	<footer class="footer"> 
+		<img class="footer-logo" src="${pageContext.request.contextPath}/images/main_logo.png" alt="">
+		<div class="footer-text">
+			<h2 class="footer-text__title">About Us</h2>
+			<div class="footer-text__contents">
+				<div class="footer-text__contents-items">
+					<h3 class="footer-text__contents-items__title">Our Team</h3>
+					<ul class="footer-text__contents-items__list">
+						<li><a href="https://github.com/haerong22">@haerong22</a></li>
+						<li><a href="https://github.com/SejinCho">@SejinCho</a></li>
+						<li><a href="https://github.com/YoungkeunAhn">@YoungkeunAhn</a></li>
+						<li><a href="https://github.com/herryboro">@herryboro</a></li>
+					</ul>
+				</div>
+				<div class="footer-text__contents-items">
+					<h3 class="footer-text__contents-items__title">Development Place</h3>
+					<a href="https://playdata.io/">encore playdata</a>
+				</div>
+			</div>
+		</div>
+	</footer>
 	
 </body>
 </html>

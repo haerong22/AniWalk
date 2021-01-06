@@ -9,8 +9,11 @@
 	<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 </head>
 <body>
-<div class="main-bg">
-	<div class="innerBox">
+<div class="index-bg">
+	<img class="index-bg__img" src="${pageContext.request.contextPath}/images/index_bg.jpg" alt="초기화면 배경이미지1">
+</div>
+	
+	<div class="loginBox">
 		<label>
 			반려견의<br>
 			행복을 위한<br>
@@ -21,7 +24,8 @@
 	
 		<a id="kakao-login-btn"></a>
 	</div>
-</div>
+
+
 
 <script>
 	  // 사용할 앱의 JavaScript 키.
