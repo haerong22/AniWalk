@@ -13,20 +13,22 @@
 	<script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
 <body>
 <div class="container" style="display: flex; flex-direction: column;">
-	<h3>서비스약관동의</h3>
-	<form id="applyForm1" class="walker-apply-form" method="POST" onsubmit="return applyCheck()"
+	
+	<form id="applyForm1" class="walkerApply__form" method="POST" onsubmit="return applyCheck()"
 		enctype="multipart/form-data" name='walker' action="/aniwalk/apply.do">
-		<ul class="terms">
+		
+		<h2 class="terms__title">서비스약관동의</h2>
+		<ul class="terms__list">
 			<li>
 				<div class="all-agree">
 					<i class="far fa-check-circle"></i>
-					<span>전체동의</span>
+					<label>전체동의</label>
 				</div>
 			</li>
 			<li>
 				<div class="essential-agree">
 					<i class="far fa-check-circle"></i>
-					<span>[필수] 개인정보 수집 및 이용 동의</span>
+					<label>[필수] 개인정보 수집 및 이용 동의</label>
 					<input id="essentialAgreeYn" type="hidden" required>
 				</div>
 				<span id="essential" class="glyphicon glyphicon-chevron-down"></span>
@@ -39,7 +41,7 @@
 			<li>
 				<div class="choose-agree">
 					<i class="far fa-check-circle"></i>
-					<span>[선택] 이벤트 정보 수신 동의</span>
+					<label>[선택] 이벤트 정보 수신 동의</label>
 				</div>
 				<span id="choose" class="glyphicon glyphicon-chevron-down"></span>
 			</li>

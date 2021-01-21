@@ -14,6 +14,7 @@ font-family: 'Noto Sans KR', sans-serif
 
 /* screens */
 @import 'screens/index-screen.css';
+@import 'screens/walkerApply-screen.css';
 
 
 ::-webkit-scrollbar {
@@ -34,28 +35,7 @@ nav{
 }
 
 
-/**************************************************
 
-    apply-nav
-
-***************************************************/
-
-.apply-nav{
-	display: flex;
-    flex-wrap: nowrap;
-    justify-content: center;
-    align-items: center;
-    
-    font-family: 'Noto Sans KR', sans-serif;
-    font-size: 3rem;
-
-    position: relative;
-    top: -25px;
-}
-.apply-nav img{
-	width: 130px;
-    height: 100px;
-}
 /**************************************************
 
     signUp
@@ -156,62 +136,3 @@ nav{
     margin: 0 auto;
 }
 
-/**************************************************
-
-    walkerApply
-
-***************************************************/
-.walker-apply-form{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    width: 50%;
-
-}
-.walker-apply-form ul{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-.terms{
-    width: 90%;
-}
-.terms li{
-    padding: 10px;
-    border: 1px solid black;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.terms li div{
-    width: 80%;
-}
-.terms li div:hover{
-    cursor: pointer;
-}
-.terms li span:hover{
-    cursor: pointer;
-}
-.auth-btn{
-    margin: 20px 10px;
-}
-.apply-list{
-    margin: 50px 10px 0 10px;
-}
-.apply-list li{
-    width: 100%;
-    margin: 5px 0;
-}
-.apply-list li img{
-    width: 300px;
-    max-height: 350px;
-
-    margin-bottom: 20px;
-}
-.apply-list li label{
-    display: block;
-}
-.walker-apply-form .btn-success{
-    margin: 40px 10px 10px 10px;
-}
