@@ -31,7 +31,7 @@ nav{
     height: 70px;
   	border-bottom: 1px solid var(--nav-border-bottom-color);
 
-    padding: 5px;
+    padding: 5px 0;
 }
 
 
