@@ -17,108 +17,107 @@
 	<!-- jquery -->
 	<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <body>
-<div class="container register" style="width: 100%; height: 100%;">
-	<div class="register-left">
+<div class="register-screen">
+	<div class="register-screen__left">
 		<img src="${pageContext.request.contextPath}/images/main_logo.png" alt="">
 		<p>
-			Walk anywhere with your dog
+			Sign Up
 		</p>
 	</div>
-	<div class="register-right">
-		<form class="form-horizontal" name="signUpForm" method="post" action="/aniwalk/signIn.do" enctype="multipart/form-data" onsubmit="return signUpCheck()">
-			<div class="form-group">
-				<label class="col-sm-2">닉네임</label>
-				<div class="col-sm-6">
-					<label>																				<!-- get방식을 받으려면  ${param.xx}를 사용-->
-						<input class="form-control" id="nickname" type="text" placeholder="닉네임 입력" name="mem_nickname" maxlength="10" required>
-						<input id="duple" name="duple" type="hidden" value="0">
-						<input class="form-control" type="hidden" name="kakao_id" value="${param.kakao_id}">
-					</label>
-				</div>
-				<div class="form-group ajax_nickname" id="ajax_memnick_name"></div>
+	<div class="register-screen__right">
+		<form name="signUpForm" method="post" action="/aniwalk/signIn.do" enctype="multipart/form-data" onsubmit="return signUpCheck()">
+			<div class="register-screen__right-row">
+				<label>닉네임</label>
+				<label>																				<!-- get방식을 받으려면  ${param.xx}를 사용-->
+					<input class="form-control" id="nickname" type="text" placeholder="닉네임 입력" name="mem_nickname" maxlength="10" required>
+					<input id="duple" name="duple" type="hidden" value="0">
+					<input class="form-control" type="hidden" name="kakao_id" value="${param.kakao_id}">
+				</label>
+
+				<div id="ajax_memnick_name"></div>
 			</div>
 			
-			<div class="form-group">
-				<label class="col-sm-2">핸드폰번호</label>
-				<div class="col-sm-10">
+			<div class="register-screen__right-row">
+				<label>핸드폰번호</label>
+				<label>
+					<input id='phoneNum' name='mem_phone' class="form-control" type="text"
+						   placeholder="휴대폰번호 11자리를 -빼고 입력해주세요" required minlength="11" maxlength="11">
+				</label>
+				<label>
+					<input id='auth-btn' type="button" class="btn btn-primary btn-phone-auth" value="휴대폰 인증하기">
+				</label>
+			</div>
+			<div>
+				<!-- 핸드폰 인증 -->
+				<input id='auth_num' type="hidden">
+				<div>
+					<input type="hidden" id="authResult" name="auth_pass">
+					<div class="unuse"></div>
+					<div class="auth-part">
+					</div>
+				</div>
+			</div>
+
+			<div class="register-screen__right-row">
+				<label>반려견 정보 등록</label>
+			</div>
+			<div>
+				<div>
+
+					<div class="mydog-input" enctype="multipart/form-data" action="/aniwalk/owner/myPro.do" method="post">
+						<div class="input-form">
+							<div>
+								<img id="clickImg" src="${pageContext.request.contextPath}/images/profile_test.png" alt="" class="img-rounded">
+								<h5>&lt;대표사진설정&gt;</h5>
+								<input id="uploadImg" type="file" class="hidden" name="files" required>
+							</div>
+							<div style="width: 40%">
+								<ul>
+									<li>
+										<label>* 이름</label>
+										<input type="text" class="form-control" name="dog_name" placeholder="강아지 이름을 입력해주세요" required>
+									</li>
+									<li>
+										<label>* 견종</label>
+										<select class="form-control" name="dog_type" required>
+											<option value="" selected>견종</option>
+											<option>포메라니안</option>
+											<option>폼피츠</option>
+											<option>사모예드</option>
+											<option>진돗개</option>
+											<option>푸들</option>
+											<option>말티즈</option>
+										</select>
+									</li>
+									<li>
+										<label>생일</label>
+										<input type="date" name="dog_birth" class="form-control" required>
+									</li>
+									<li>
+										<label>특징</label>
+									</li>
+									<li>
+										<label style="width: 100%">
+											<textarea class="form-control" name="dog_info" cols="20" required></textarea>
+										</label>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+			<div class="register-screen__right-row">
+				<div class="checkbox">
 					<label>
-						<input id='phoneNum' name='mem_phone' class="form-control" type="text"
-							   placeholder="휴대폰번호 11자리를 -빼고 입력해주세요" required minlength="11" maxlength="11">
-						<input id='auth-btn' type="button" class="btn btn-primary auth-btn" value="휴대폰 인증하기">
+						<input type="checkbox" required> 개인정보 수집에 대한 동의
 					</label>
-					<!-- 핸드폰 인증 -->
-					<input id='auth_num' type="hidden">
-					<div class="form-group">
-						<input type="hidden" id="authResult" name="auth_pass">
-						<div class="unuse"></div>
-						<div class="auth-part">
-						</div>
-					</div>
 				</div>
 			</div>
-
-			<div class="form-group">
-				<label class="col-sm-2">반려견 정보 등록</label>
-			</div>
-			<div class="form-group">
-				<div class="col-sm-12">
-
-				<div class="mydog-input" enctype="multipart/form-data" action="/aniwalk/owner/myPro.do" method="post">
-					<div class="input-form">
-						<div>
-							<img id="clickImg" src="${pageContext.request.contextPath}/images/profile_test.png" alt="" class="img-rounded">
-							<h5>&lt;대표사진설정&gt;</h5>
-							<input id="uploadImg" type="file" class="hidden" name="files" required>
-						</div>
-						<div style="width: 40%">
-							<ul>
-								<li>
-									<label>* 이름</label>
-									<input type="text" class="form-control" name="dog_name" placeholder="강아지 이름을 입력해주세요" required>
-								</li>
-								<li>
-									<label>* 견종</label>
-									<select class="form-control" name="dog_type" required>
-										<option value="" selected>견종</option>
-										<option>포메라니안</option>
-										<option>폼피츠</option>
-										<option>사모예드</option>
-										<option>진돗개</option>
-										<option>푸들</option>
-										<option>말티즈</option>
-									</select>
-								</li>
-								<li>
-									<label>생일</label>
-									<input type="date" name="dog_birth" class="form-control" required>
-								</li>
-								<li>
-									<label>특징</label>
-								</li>
-								<li>
-									<label style="width: 100%">
-										<textarea class="form-control" name="dog_info" cols="20" required></textarea>
-									</label>
-								</li>
-							</ul>
-						</div>
-					</div>
-				</div>
-
-				</div>
-			</div>
-			<div class="form-group">
-				<div class="col-sm-offset-2 col-sm-10">
-					<div class="checkbox">
-						<label>
-							<input type="checkbox" required> 개인정보 수집에 대한 동의
-						</label>
-					</div>
-				</div>
-			</div>
-			<div class="form-group">
-				<div class="col-sm-offset-2 col-sm-12">
-					<button type="submit" class="btn btn-primary">Sign in</button>
+			<div class="register-screen__right-row">
+				<div>
+					<button type="submit" class="btn btn-primary">가입하기</button>
 				</div>
 			</div>
 		</form>
@@ -200,7 +199,7 @@ $(document).ready(function(){
 	//인증번호 관련
 	
 	// input태그의 type=button, class값 auth-btn 으로 이루어진 속성을 가져와 click 이벤트를 걸어준다
-	const authBtn = document.querySelector('.auth-btn');
+	const authBtn = document.getElementById('auth-btn');
 	authBtn.addEventListener('click',function(){
 		// 입력한 휴대폰 번호를 컨트롤러의 phoneCheck메서드로 보내 DB에 이미 가입되어 있는 번호가 있는지 조회
 		$.ajax({

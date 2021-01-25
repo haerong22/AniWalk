@@ -4,4 +4,6 @@
     --white: #fafafa;
     --black: #161616;
     --nav-border-bottom-color: #80808026;
+    
+    --signup-bgimg: linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%);
 }

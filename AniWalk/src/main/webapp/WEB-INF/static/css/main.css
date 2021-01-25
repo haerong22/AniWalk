@@ -1,9 +1,3 @@
-/*Fonts*/
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');
-/*
-font-family: 'Noto Sans KR', sans-serif
-*/
-
 @import 'reset.css';
 @import 'variable.css';
 
@@ -15,6 +9,7 @@ font-family: 'Noto Sans KR', sans-serif
 /* screens */
 @import 'screens/index-screen.css';
 @import 'screens/walkerApply-screen.css';
+@import 'screens/signUp-screen.css';
 
 
 ::-webkit-scrollbar {
@@ -36,103 +31,5 @@ nav{
 
 
 
-/**************************************************
 
-    signUp
-
-***************************************************/
-.container{
-	display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    
-    width: 100%;
-    padding: 20px;
-    
-}
-.register{
-    background-image: linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%);
-    display: flex;
-    flex-wrap: nowrap;
-    justify-content: center;
-    align-items: center;
-    
-    height: 100%;
-
-    width: 100%;
-    height: 90%;
-    margin: auto 1px;
-}
-
-.register-left{
-    width: 25%;
-    height: 90%;
-
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    font-size: 1.6rem;
-}
-.register-right{
-    width: 75%;
-    height: 90%;
-    padding: 20px;
-    border-radius: 10px;
-
-    background: var(--white);
-    overflow: scroll;
-    -ms-overflow-style: none; /* IE and Edge */
-}
-.register-right ul{
-	margin: 0;
-}
-.register-right button{
-	width: 60%;
-}
-.register-right .mydog-input ul li{
-	display: flex;
-	flex-direction: column;
-	
-	margin: 10px 0;
-}
-
-
-
-.mydog-input{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-
-    width: 80%;
-    height: 90%;
-}
-.mydog-input .input-form{
-    display: flex;
-    justify-content: space-around;
-}
-.mydog-input .input-form div{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-.mydog-input .input-form img{
-    width: 200px;
-}
-.mydog-input .input-form img:hover{
-    cursor: pointer;
-}
-.mydog-input .input-form ul{
-    width: 100%;
-}
-.mydog-input .input-form ul li{
-    margin: 10px 0;
-}
-.mydog-input button{
-    width: 85%;
-    height: 50px;
-    margin: 0 auto;
-}
 
