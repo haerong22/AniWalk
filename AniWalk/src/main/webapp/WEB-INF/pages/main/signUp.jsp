@@ -25,7 +25,7 @@
 		</p>
 	</div>
 	<div class="register-screen__right">
-		<form name="signUpForm" method="post" action="/aniwalk/signIn.do" enctype="multipart/form-data" onsubmit="return signUpCheck()">
+		<form class="register-screen__right-form" name="signUpForm" method="post" action="/aniwalk/signIn.do" enctype="multipart/form-data" onsubmit="return signUpCheck()">
 			<div class="register-screen__right-row">
 				<label>닉네임</label>
 				<label>																				<!-- get방식을 받으려면  ${param.xx}를 사용-->
@@ -61,65 +61,55 @@
 			<div class="register-screen__right-row">
 				<label>반려견 정보 등록</label>
 			</div>
-			<div>
-				<div>
 
-					<div class="mydog-input" enctype="multipart/form-data" action="/aniwalk/owner/myPro.do" method="post">
-						<div class="input-form">
-							<div>
-								<img id="clickImg" src="${pageContext.request.contextPath}/images/profile_test.png" alt="" class="img-rounded">
-								<h5>&lt;대표사진설정&gt;</h5>
-								<input id="uploadImg" type="file" class="hidden" name="files" required>
-							</div>
-							<div style="width: 40%">
-								<ul>
-									<li>
-										<label>* 이름</label>
-										<input type="text" class="form-control" name="dog_name" placeholder="강아지 이름을 입력해주세요" required>
-									</li>
-									<li>
-										<label>* 견종</label>
-										<select class="form-control" name="dog_type" required>
-											<option value="" selected>견종</option>
-											<option>포메라니안</option>
-											<option>폼피츠</option>
-											<option>사모예드</option>
-											<option>진돗개</option>
-											<option>푸들</option>
-											<option>말티즈</option>
-										</select>
-									</li>
-									<li>
-										<label>생일</label>
-										<input type="date" name="dog_birth" class="form-control" required>
-									</li>
-									<li>
-										<label>특징</label>
-									</li>
-									<li>
-										<label style="width: 100%">
-											<textarea class="form-control" name="dog_info" cols="20" required></textarea>
-										</label>
-									</li>
-								</ul>
-							</div>
-						</div>
-					</div>
-
+			<div class="input-dog">
+				
+				<div class="input-dog__image-part">
+					<img id="clickImg" src="${pageContext.request.contextPath}/images/profile_test.png" alt="" class="img-rounded">
+					<h5>&lt;대표사진설정&gt;</h5>
+					<input id="uploadImg" type="file" class="hidden" name="files" required>
+				</div>
+				
+				<div class="input-dog__info-part">
+					<ul>
+						<li>
+							<label>이름</label>
+							<input type="text" class="form-control" name="dog_name" placeholder="강아지 이름을 입력해주세요" required>
+						</li>
+						<li>
+							<label>견종</label>
+							<select class="form-control" name="dog_type" required>
+								<option value="" selected>견종</option>
+								<option>포메라니안</option>
+								<option>폼피츠</option>
+								<option>사모예드</option>
+								<option>진돗개</option>
+								<option>푸들</option>
+								<option>말티즈</option>
+							</select>
+						</li>
+						<li>
+							<label>생일</label>
+							<input type="date" name="dog_birth" class="form-control" required>
+						</li>
+						<li>
+							<label>특징</label>
+							<label class="input-dog__info-part__dog-feature">
+								<textarea class="form-control" name="dog_info" required></textarea>
+							</label>
+						</li>
+					</ul>
 				</div>
 			</div>
 			<div class="register-screen__right-row">
-				<div class="checkbox">
+				<div class="checkbox-part">
 					<label>
 						<input type="checkbox" required> 개인정보 수집에 대한 동의
 					</label>
 				</div>
 			</div>
-			<div class="register-screen__right-row">
-				<div>
-					<button type="submit" class="btn btn-primary">가입하기</button>
-				</div>
-			</div>
+			<button type="submit" class="btn btn-primary register-screen__right-form__button">가입하기</button>
+
 		</form>
 	</div>
 </div>
