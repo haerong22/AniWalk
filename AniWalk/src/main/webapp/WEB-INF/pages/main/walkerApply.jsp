@@ -157,11 +157,13 @@
 	});
 	
 	// profile 사진 
-	$('#wk_profile').on('change', function(e){
+	$('#wk_profile').on('change', function(e){		
+		
 		var cnt = 0;
     	var maxSize = 209715200;
-    	var files = e.target.files;
+    	var files = e.target.files;  	
     	var filesArr = Array.prototype.slice.call(files);
+    	console.log('안녕');
     	if(files.length == 0){
     		$('#wk_img').attr('src', '${pageContext.request.contextPath}/images/main_logo.png' );
     	} else if(files.length > 3) {
@@ -176,6 +178,7 @@
         			alert("사진과 동영상만 업로드 가능합니다!");
         			
         		} else {
+            		console.log(URL.createObjectURL(e.target.files[0]));
         			$('#wk_img').attr('src', URL.createObjectURL(e.target.files[0]));
         		}
         	});

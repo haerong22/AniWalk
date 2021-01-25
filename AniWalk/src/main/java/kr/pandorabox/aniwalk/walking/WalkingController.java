@@ -28,7 +28,6 @@ public class WalkingController {
 	@Autowired
 	MemberService memberService; 
 	
-	// 오너 페이지 - 산책완료 정보
 	@RequestMapping("/owner/activDone.do")
 	public ModelAndView getOwnerActivDoneInfo(String walking_id, HttpServletRequest req) {
 		String mem_nickname = (String)req.getSession().getAttribute("mem_nickname");
@@ -45,7 +44,6 @@ public class WalkingController {
 		return mav;
 	}
 	
-	// 프렌즈 페이지 - 산책완료 정보
 	@RequestMapping("/walker/activDone.do")
 	public ModelAndView getActivDoneInfo(String walking_id) {
 		ModelAndView mav = new ModelAndView();
@@ -57,7 +55,6 @@ public class WalkingController {
 		return mav;
 	}
 	
-	// 프렌즈 페이지 - 산책현황 리스트
 	@RequestMapping("/walker/main.do")
 	public ModelAndView main(HttpServletRequest req) {
 		String walker_id = (String) req.getSession().getAttribute("walker_id");
@@ -65,14 +62,12 @@ public class WalkingController {
 		return new ModelAndView("walker/main", "walkingList", walkingList);
 	}	
 	
-	// 오너 페이지 - 모집 리스트 상세 검색
 	@RequestMapping("/walker/recruit/detail.do")
 	public ModelAndView getSearchRecruitList(WalkingDTO walkingDto) {
 		List<WalkingDTO> recruitList = walkingService.getSearchRecruitList(walkingDto);
 		return new ModelAndView("walker/recruitlist", "recruitList", recruitList);
 	}
 	
-	// 미션정보 불러오기
 	@ResponseBody
 	@RequestMapping(value = "/walking/getWalkingMission.do",
 			method = RequestMethod.POST,
@@ -82,7 +77,6 @@ public class WalkingController {
 		return result;
 	}	
 	
-	// 산책 path 불러오기
 	@ResponseBody
 	@RequestMapping(value = "/walking/getWalkingLocation.do",
 			method = RequestMethod.POST,
@@ -92,7 +86,6 @@ public class WalkingController {
 		return path;
 	}	
 	
-	// 산책 path 저장
 	@ResponseBody
 	@RequestMapping(value = "/walker/insertWalkingLocation.do",
 			method = RequestMethod.GET,
@@ -103,9 +96,8 @@ public class WalkingController {
 		System.out.println(walkingDto.getWalking_id());
 		int result = walkingService.insertWalkingLocation(walkingDto);
 		return "success";
-	}
+	}	
 	
-	// 산책 시작 
 	@ResponseBody
 	@RequestMapping(value = "/walking/walkingStart.do",
 			method = RequestMethod.POST,
@@ -116,7 +108,6 @@ public class WalkingController {
 		return list;
 	}
 	
-	// 프렌즈 산책 정보 리스트
 	@RequestMapping("/walker/activList.do")
 	public ModelAndView getWalkingList(HttpServletRequest req) {
 		String walker_id = (String) req.getSession().getAttribute("walker_id");
@@ -124,8 +115,6 @@ public class WalkingController {
 		return new ModelAndView("walker/activList", "activList", list);
 	}
 
-	
-	// 산책 정보 가져오기
 	@RequestMapping("/walker/activiting.do")
 	public ModelAndView getMissionList(String walking_id) {
 		ModelAndView mav = new ModelAndView();
@@ -138,13 +127,11 @@ public class WalkingController {
 		return mav;
 	}
 	
-	// 모집글 리스트
 	@RequestMapping("/walker/recruitlist.do")
 	public ModelAndView recruitlist(String search, HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView();
 		List<WalkingDTO> list = walkingService.getRecruitList(search);
 		String walker_id = (String) request.getSession().getAttribute("walker_id");
-		//워커 인덱스 가져오기
 		String wk_id = walkingService.wkId(walker_id);
 		mav.addObject("wk_id", wk_id);
 		mav.addObject("recruitList", list);
@@ -152,7 +139,6 @@ public class WalkingController {
 		return mav;
 	}
 	
-	//모집글 올리기 
 	@RequestMapping("/owner/recruit.do")
 	public ModelAndView recruit(HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView();
@@ -167,14 +153,13 @@ public class WalkingController {
 		return mav;
 	}
 	
-	//모집글 insert
 	@RequestMapping("/owner/recruitInsert.do")
 	public String recruitInsert(WalkingDTO walking) {
 		int result = walkingService.recruitInsertUpdate(walking);
-		System.out.println("쿼리문 결과:"+result);
+		System.out.println("荑쇰━臾� 寃곌낵:"+result);
 		return "redirect:/owner/recruitList.do";
 	}
-	//내 모집글 list
+	
 	@RequestMapping("/owner/recruitList.do")
 	public ModelAndView list(HttpServletRequest req) {
 		ModelAndView mav = new ModelAndView();
@@ -188,7 +173,6 @@ public class WalkingController {
 		return mav;
 	}
 	
-	//신청자 list
 	@RequestMapping(value="/walking/ajax_applyList.do",
 			method = RequestMethod.GET,
 			produces = "application/json;charset=utf-8")
@@ -197,10 +181,8 @@ public class WalkingController {
 		return applyList;
 	}
 	
-	//매칭 하기
 	@RequestMapping("/walking/matching.do")
 	public String matching(String match_wk_id, String walking_id) {
-		//매칭
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("match_wk_id", match_wk_id);
 		map.put("walking_id", walking_id);
@@ -208,17 +190,16 @@ public class WalkingController {
 		return "owner/activityList";
 	}
 	
-	//오너 인덱스(오늘 산책일정이 여기에 떠야함)
 	@RequestMapping("/owner/index.do")
 	public ModelAndView ownerIndex(HttpServletRequest req) {
 		ModelAndView mav = new ModelAndView();
 		String mem_nickname = (String) req.getSession().getAttribute("mem_nickname");
 		String filename = memberService.getProfile(mem_nickname);
 		
-		//현재 날짜
 		SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
 		Date today = new Date();
 		String walk_date = format1.format(today);
+		System.out.println("walk_date: " + walk_date);
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("mem_nickname", mem_nickname);
 		map.put("walk_date", walk_date);
@@ -230,7 +211,6 @@ public class WalkingController {
 		return mav;
 	}
 	
-	//(전체 산책 일정)
 	@RequestMapping("/owner/activityList.do")
 	public ModelAndView todayWalking(HttpServletRequest req) {
 		ModelAndView mav = new ModelAndView();
@@ -243,7 +223,6 @@ public class WalkingController {
 		return mav;
 	}
 	
-	//owner 실시간 산책 정보
 	@RequestMapping("/owner/activity.do")
 	public ModelAndView walkingInfo(String walking_id, HttpServletRequest req) {
 		String mem_nickname = (String)req.getSession().getAttribute("mem_nickname");
@@ -258,8 +237,6 @@ public class WalkingController {
 		return mav;
 	}
 	
-	//산책 신청
-	
 	@RequestMapping("walker/walkingRecruit.do")
 	public String walkingRecruit(String walking_id, String wk_id) {
 		Map<String, String> map = new HashMap<String, String>();
@@ -268,7 +245,6 @@ public class WalkingController {
 		walkingService.walkingRecruit(map);
 		return "redirect:/walker/recruitlist.do";
 	}
-	//워커 산책 신청시 신청했었는지 확인
 	
 	@RequestMapping(value="/walking/applyCheck.do",
 			method = RequestMethod.GET,

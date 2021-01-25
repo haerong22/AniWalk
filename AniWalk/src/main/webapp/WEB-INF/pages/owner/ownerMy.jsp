@@ -214,9 +214,9 @@
 								<option>리트리버</option>
 							</select>
 						</li>
-						<li class="">
+						<li class="modify_modal_birth">
 							<label>생일</label>
-							<input type="date" name="dog_birth" class="form-control">
+							<input type="date" name="dog_birth" class="form-control" >
 						</li>
 						<li>
 							<label>특징</label>
@@ -272,8 +272,8 @@
 		uploadImg.click();
 	});
 
-	// 반려견 사진
-	$('#uploadImg').on('change', function(e){
+	// 반려견 사진		
+	$('#uploadImg').on('change', function(e){		
 		var maxSize = 209715200;
 		var files = e.target.files;
 		var filesArr = Array.prototype.slice.call(files);
@@ -284,8 +284,7 @@
 			} else if(!f.type.match("image.*")) {
 				alert("사진과 동영상만 업로드 가능합니다!");
 			} else {
-				$('#clickImg').attr('src', URL.createObjectURL(e.target.files[0]));
-				console.log(uploadImg.value);
+				$('#clickImg').attr('src', URL.createObjectURL(e.target.files[0]));				
 			}
 		});
 	});
@@ -316,22 +315,22 @@
 	for(let i=0; i<dogUpdateBtn.length; i++){
 		dogUpdateBtn[i].addEventListener('click',function (){
 			dogUpdateModal.classList.remove('hidden');
-			/*경찬이형 여기 ajax로 기존에 있는 데이터들 불러와야되요*/
+			/*경찬이형 여기 ajax로 기존에 있는 데이터들 불러와야되요*/					
+			
 			$.ajax({
 				url: "/aniwalk/owner/dogInfoList.do",
 				type: "get",
 				data: {
 					"dog_id" : dogUpdateBtn[i].value			
 				},	
-				success: function(data) {
-					console.log(data);	
-					console.log(data[0].dog_id);	
+				success: function(data) {				
+					let startDate = data[0].dog_birth.split(' ');				
 					$(".dog-update-modal").find(".modify_modal_name").children().val(data[0].dog_name);
-					$(".dog-update-modal").find(".modify_modal_type").children().val(data[0].dog_type);
-					$(".dog-update-modal").find(".modify_modal_birth").children().val(data[0].dog_birth);
+					$(".dog-update-modal").find(".modify_modal_type").children().val(data[0].dog_type);										
+					$(".dog-update-modal").find(".modify_modal_birth").children().val(startDate[0]);					
 					$(".dog-update-modal").find(".modify_modal_info").children().children().val(data[0].dog_info);
-					$(".dog-update-modal").find(".hidden_dog_id").val(data[0].dog_id);
-													
+					$(".dog-update-modal").find(".hidden_dog_id").val(data[0].dog_id);						
+					$(".dog-update-modal").find("#dogUpdateImg").attr('src', '/owner' + '/' + String(data[0].dog_image));																
 				},
 				error:function(a,b,c){
 				}
@@ -347,6 +346,12 @@
 											
 	document.getElementById("dogUpdateImg").addEventListener("click", function() {
 		document.getElementById("UpdateuploadImg").click();
+	});
+
+	$('#UpdateuploadImg').on('change', function(event) {
+		let file = event.target.files;				
+		console.log(URL.createObjectURL(event.target.files[0]));
+		$('#dogUpdateImg').attr('src', URL.createObjectURL(event.target.files[0]));						
 	});
 
 </script>
