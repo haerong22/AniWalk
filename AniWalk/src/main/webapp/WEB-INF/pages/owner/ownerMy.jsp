@@ -329,8 +329,8 @@
 					$(".dog-update-modal").find(".modify_modal_type").children().val(data[0].dog_type);										
 					$(".dog-update-modal").find(".modify_modal_birth").children().val(startDate[0]);					
 					$(".dog-update-modal").find(".modify_modal_info").children().children().val(data[0].dog_info);
-					$(".dog-update-modal").find(".hidden_dog_id").val(data[0].dog_id);						
-					$(".dog-update-modal").find("#dogUpdateImg").attr('src', '/owner' + '/' + String(data[0].dog_image));																
+					$(".dog-update-modal").find(".hidden_dog_id").val(data[0].dog_id);			
+					$(".dog-update-modal").find("#dogUpdateImg").attr('src', '/owner/' + String(data[0].dog_image));																
 				},
 				error:function(a,b,c){
 				}
@@ -340,6 +340,7 @@
 	dogUpdateModal.addEventListener('click',function (){
 		dogUpdateModal.classList.add('hidden');
 	});
+	
 	updateModalClose.addEventListener('click',function (){
 		dogUpdateModal.classList.add('hidden');
 	});
@@ -349,8 +350,7 @@
 	});
 
 	$('#UpdateuploadImg').on('change', function(event) {
-		let file = event.target.files;				
-		console.log(URL.createObjectURL(event.target.files[0]));
+		//let file = event.target.files;				
 		$('#dogUpdateImg').attr('src', URL.createObjectURL(event.target.files[0]));						
 	});
 

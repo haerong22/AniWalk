@@ -182,31 +182,34 @@ public class MemberController {
 	public ModelAndView modifyInfo(HttpServletRequest req) {
 		String mem_nickname = (String)req.getSession().getAttribute("mem_nickname");
 		String mem_phone = memberService.getPhone_number(mem_nickname);
+		String mem_profile = memberService.getProfile(mem_nickname);
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("phone", mem_phone);
 		mav.addObject("mem_nickname", mem_nickname);
+		mav.addObject("mem_profile", mem_profile);
 		mav.setViewName("owner/ownerMyInfoUpdateView");		// owner/ownerMyInfoUpdate.jsp
 		return mav;
 	}
 			
 	@RequestMapping("/owner/ownerMyInfoUpdatePro.do")
-	public ModelAndView modifyInfoPro(JoinMemberDogImgDTO joinMemberDogImgDTO, HttpServletRequest req) {
-		String mem_nickname = (String)req.getSession().getAttribute("mem_nickname");
-	
+	public ModelAndView modifyInfoPro(JoinMemberDogImgDTO joinMemberDogImgDTO, HttpServletRequest req) {		
 		ModelAndView mav = new ModelAndView();		
 		MultipartFile[] files = joinMemberDogImgDTO.getFiles();
 		ArrayList<String> filelist = new ArrayList<String>();
+		
 		String path = "C:/owner";
 		for(int i=0; i<files.length; i++) {
 			String fileName = files[i].getOriginalFilename();
-			if(fileName.length()!=0) {
+			if(fileName.length()!= 0) {
 				String new_file = uploadService.upload(files[i], path, fileName);
 				filelist.add(new_file);
 			}
 		}		
-		int result = memberService.updateUserInfo(joinMemberDogImgDTO, filelist);		
-		String filename = memberService.getProfile(mem_nickname);		
+		
+		int result = memberService.updateUserInfo(joinMemberDogImgDTO, filelist);	
+		String change_nickname = joinMemberDogImgDTO.getMem_nickname();	
+		String filename = memberService.getProfile(change_nickname);			
 				
 		if(result == 1) {
 			req.getSession().setAttribute("mem_nickname", joinMemberDogImgDTO.getMem_nickname());

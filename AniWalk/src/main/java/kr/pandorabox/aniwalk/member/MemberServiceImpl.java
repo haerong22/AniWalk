@@ -90,22 +90,25 @@ public class MemberServiceImpl implements MemberService {
 	// 회원정보 수정
 	@Override
 	public int updateUserInfo(JoinMemberDogImgDTO joinMemberDogImgDTO, ArrayList<String> filelist) {
-		int memInfo = memberDAO.updateUserInfo(joinMemberDogImgDTO);	
-		List<String> list = new ArrayList<String>();
-		list.add(joinMemberDogImgDTO.getMem_nickname());
-		list.add(filelist.get(0));
-		
+		List<String> list = new ArrayList<String>();		
 		int result = 0;
+		int memInfo = 0;
+		int memProfile = 0;
 		
-		if(filelist.size() != 0) {
-			int memProfile = memberDAO.updateUserProfile(list);
-			if(memInfo >= 1 && memProfile >= 1) {
-				result = 1;
-			}
+		if(filelist.size() == 0) {		
+			memInfo = memberDAO.updateUserInfo(joinMemberDogImgDTO);	
+		} else {
+			memInfo = memberDAO.updateUserInfo(joinMemberDogImgDTO);	
+			list.add(joinMemberDogImgDTO.getMem_nickname());
+			list.add(filelist.get(0));
+			memProfile = memberDAO.updateUserProfile(list);
+		}												
+		
+		if(memInfo >= 1 || memProfile >= 1) {
+			result = 1;
 		} else {
 			result = 2;
 		}
-		System.out.println("result: " + result);
 		return result;
 	}
 	
@@ -126,6 +129,7 @@ public class MemberServiceImpl implements MemberService {
 	// 강아지 정보 수정
 	@Override
 	public void modifyDogInfo(JoinMemberDogImgDTO JoinMemberDogImgDTO) {	
+		
 		MultipartFile[] files = JoinMemberDogImgDTO.getFiles();
 		ArrayList<String> filelist = new ArrayList<String>();
 		String path = "C:/owner";
@@ -137,9 +141,15 @@ public class MemberServiceImpl implements MemberService {
 				filelist.add(new_file);
 			}
 		}
-		memberDAO.modifyDogInfo(JoinMemberDogImgDTO);		
+		
 		String dog_id = JoinMemberDogImgDTO.getDog_id();
-		memberDAO.modifyDogProfile(dog_id, filelist);
+		
+		if(filelist.size() == 0) {		
+			memberDAO.modifyDogInfo(JoinMemberDogImgDTO);	
+		} else {
+			memberDAO.modifyDogInfo(JoinMemberDogImgDTO);	
+			memberDAO.modifyDogProfile(dog_id, filelist);
+		}		
 	}
 	
 	// 개 정보 삭제

@@ -56,6 +56,14 @@
 	userImg.addEventListener('click',function (){
 		userInputImg.click();
 	});
+	
+	$(document).ready(function() {
+		$('#userInputImg').on('change', function(e) {			
+			$('#userImg').attr('src', URL.createObjectURL(e.target.files[0]));
+		});	
+		$("#userImg").attr('src', '/owner/'+ `${mem_profile}`);	
+	});
+		
 
 </script>
 </html>
