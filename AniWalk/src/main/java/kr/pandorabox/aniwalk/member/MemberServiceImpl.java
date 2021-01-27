@@ -33,7 +33,6 @@ public class MemberServiceImpl implements MemberService {
 		
 		if(filelist.size() != 0) {
 			int success = memberDAO.fileInsert(filelist);
-			System.out.println("success: " + success);
 			if(result1 >= 1 && result2 >= 1 && success >= 1) {
 				result = 1;
 			}
@@ -66,7 +65,6 @@ public class MemberServiceImpl implements MemberService {
 		
 		if(filelist.size() != 0) {
 			int success = memberDAO.addfileInsert(filelist);
-			System.out.println("success: " + success);
 			if(result1 >= 1 && success >= 1) {
 				result = 1;
 			}
@@ -135,7 +133,6 @@ public class MemberServiceImpl implements MemberService {
 		String path = "C:/owner";
 		for(int i=0; i<files.length; i++) {
 			String fileName = files[i].getOriginalFilename();
-			System.out.println("fileName: " + fileName);
 			if(fileName.length()!=0) {
 				String new_file = uploadService.upload(files[i], path, fileName);
 				filelist.add(new_file);
@@ -155,6 +152,7 @@ public class MemberServiceImpl implements MemberService {
 	// 개 정보 삭제
 	@Override
 	public void delDog(String dog_id) {
+		memberDAO.delDogImg(dog_id);
 		memberDAO.delDog(dog_id);	
 	}
 

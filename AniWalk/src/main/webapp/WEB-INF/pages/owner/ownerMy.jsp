@@ -335,6 +335,10 @@
 				error:function(a,b,c){
 				}
 			});
+			
+			$('.close-btn').on('click', function() {
+				dogUpdateModal.classList.add('hidden');
+			});
 		})
 	};
 	dogUpdateModal.addEventListener('click',function (){

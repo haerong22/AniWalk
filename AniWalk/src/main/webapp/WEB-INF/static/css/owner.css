@@ -116,6 +116,11 @@ button{
     top: 2px;
     right: 3%;
 }
+
+.modal-content .close-btn:hover{
+	background-color: #9e9e9e;
+}
+
 .modal-content .btn-line .btn-default{
     background: var(--darkgray);
     color: var(--white);

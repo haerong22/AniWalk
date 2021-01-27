@@ -94,7 +94,6 @@ public class MemberDAOImpl implements MemberDAO {
 	
 	@Override
 	public List<JoinMemberDogImgDTO> getDogInfo(Map<String, String> map) {
-		System.out.println("map: " + map);
 		return sqlSession.selectList("kr.pandorabox.aniwalk.member.getDogInfo", map);
 	}	
 	
@@ -110,6 +109,11 @@ public class MemberDAOImpl implements MemberDAO {
 		map.put("dog_profile", filelist.get(0));	
 		sqlSession.update("kr.pandorabox.aniwalk.member.modifyDogProfile", map);
 	}	
+	
+	@Override
+	public void delDogImg(String dog_id) {	
+		sqlSession.delete("kr.pandorabox.aniwalk.member.delDogImg", dog_id);
+	}
 	
 	@Override
 	public void delDog(String dog_id) {

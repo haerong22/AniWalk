@@ -104,7 +104,11 @@
 		update ani_dog_img set dog_image=#{dog_profile} where dog_id=#{dog_id}
 	</update>
 	
-	<update id="delDog" parameterType="String">
-		update ani_dog set dog_name=null, dog_birth=null, dog_type=null, dog_info=null where dog_id=#{dog_id}
-	</update>
+	<delete id="delDogImg" parameterType="String">
+		delete from ani_dog_img where dog_id=#{dog_id}
+	</delete>
+	
+	<delete id="delDog" parameterType="String">
+		delete from ani_dog where dog_id=#{dog_id}
+	</delete>
 </mapper>

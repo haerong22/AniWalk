@@ -22,8 +22,15 @@
 				<tr>
 					<th colspan="2">
 						<div class="img-part">
-							<img style="width: 200px;" id="userImg"
-								 src="/aniwalk/images/profile_test.png" alt="" class="img-rounded">
+							<c:set var="profile" value="${mem_profile}"/>				
+							<c:if test="${profile eq null || profile eq ''}">
+								<img style="width: 200px;" id="userImg"
+										 src="/aniwalk/images/profile_test.png" alt="" class="img-rounded">
+							</c:if>	
+							<c:if test="${profile ne null || profile ne ''}">
+								<img style="width: 200px;" id="userImg"
+										 src="/owner/${profile}" alt="" class="img-rounded">
+							</c:if>					
 							<h5>&lt;대표사진설정&gt;</h5>
 							<input id="userInputImg" type="file" class="hidden" name="files">
 						</div>
@@ -61,7 +68,8 @@
 		$('#userInputImg').on('change', function(e) {			
 			$('#userImg').attr('src', URL.createObjectURL(e.target.files[0]));
 		});	
-		$("#userImg").attr('src', '/owner/'+ `${mem_profile}`);	
+	
+		//$("#userImg").attr('src', '/owner/'+ `${mem_profile}`);			
 	});
 		
 

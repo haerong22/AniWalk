@@ -64,7 +64,7 @@ function signUpCheck() {
 }
 
 //핸드폰인증 유효성
-addPhoneAuthForm = function(){
+addPhoneAuthForm = function() {
     const authPart = document.querySelector('.auth-part');
     const unuse = document.querySelector('.unuse');
     const addForm = `
@@ -99,9 +99,8 @@ addPhoneAuthForm = function(){
         unuse.innerHTML = '';
         return true;
     }
-
-
 }
+
 //작성한 핸드폰 번호가 사용중인 번호일 때 호출
 phoneUnusable = function(){
     const unuse = document.querySelector('.unuse');

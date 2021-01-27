@@ -18,4 +18,5 @@ public interface MemberService {
 	public String phoneCheck(String phoneNum);
 	public int nicknameCheck(String mem_nickname);
 	
+	
 }

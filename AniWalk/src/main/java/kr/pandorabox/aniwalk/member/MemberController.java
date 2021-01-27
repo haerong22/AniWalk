@@ -89,15 +89,15 @@ public class MemberController {
 	}	
 	
 	@ResponseBody
-	@RequestMapping(value="member/auth.do",
+	@RequestMapping(value="/member/auth.do",
 			method = RequestMethod.POST,
 			produces = "application/text;charset=utf-8")
 	public String auth(String wk_phone) {
-		Random ran = new Random();
+		System.out.println("인증시 입력한 핸드폰 번호: " + wk_phone);
+		Random ran = new Random();	
 	    String auth = Integer.toString(ran.nextInt(899999) + 100000); 
-	    System.out.println("auth: " + auth);
-	    auth = hash.toSHA256(auth);
-	    System.out.println("auth2: " + auth);
+	    System.out.println("인증번호: " + auth);
+	    auth = hash.toSHA256(auth);  
 		return auth;
 	}
 		
@@ -137,7 +137,6 @@ public class MemberController {
 		String path = "C:/owner";
 		for(int i=0; i<files.length; i++) {
 			String fileName = files[i].getOriginalFilename();
-			System.out.println("fileName: " + fileName);
 			if(fileName.length()!=0) {
 				String new_file = uploadService.upload(files[i], path, fileName);
 				filelist.add(new_file);
@@ -183,7 +182,7 @@ public class MemberController {
 		String mem_nickname = (String)req.getSession().getAttribute("mem_nickname");
 		String mem_phone = memberService.getPhone_number(mem_nickname);
 		String mem_profile = memberService.getProfile(mem_nickname);
-		
+		System.out.println("유저 프로필 사진: " + mem_profile);
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("phone", mem_phone);
 		mav.addObject("mem_nickname", mem_nickname);

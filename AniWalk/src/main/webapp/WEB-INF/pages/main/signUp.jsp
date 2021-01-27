@@ -16,6 +16,7 @@
 </head>
 	<!-- jquery -->
 	<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/static/js/main.js"></script>
 <body>
 <div class="register-screen">
 	<div class="register-screen__left">
