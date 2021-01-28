@@ -149,14 +149,13 @@ public class WalkingController {
 		mav.addObject("filename", filename);
 		mav.addObject("recruit_mem_id",recruit_mem_id);
 		mav.addObject("walkingDtos", walkingDtos);
-		mav.setViewName("owner/recruit");
+		mav.setViewName("owner/recruit");	// owner/ownerRecruit.jsp
 		return mav;
 	}
 	
 	@RequestMapping("/owner/recruitInsert.do")
 	public String recruitInsert(WalkingDTO walking) {
 		int result = walkingService.recruitInsertUpdate(walking);
-		System.out.println("荑쇰━臾� 寃곌낵:"+result);
 		return "redirect:/owner/recruitList.do";
 	}
 	

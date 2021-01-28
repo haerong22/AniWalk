@@ -37,16 +37,18 @@
 				<div class="swiper-wrapper">
 					<!-- Slides -->
 					<c:forEach var="walkingDto" items="${walkingDtos}" varStatus="mystatus">
-					<div class="swiper-slide">
-						<ol>
-							<li>
-								<img class="img-rounded" src="/owner/${walkingDto.dog_image}" alt="">
-							</li>
-							<li>
-								<input type="radio" name="dog_id" value="${walkingDto.dog_id}" required> ${walkingDto.dog_name}
-							</li>
-						</ol>
-					</div>
+						<c:if test="${walkingDto.dog_name ne null}">
+							<div class="swiper-slide">
+								<ol>
+									<li>
+										<img class="img-rounded" src="/owner/${walkingDto.dog_image}" alt="">
+									</li>
+									<li>
+										<input type="radio" name="dog_id" value="${walkingDto.dog_id}" required> ${walkingDto.dog_name}
+									</li>
+								</ol>
+							</div>
+						</c:if>
 					</c:forEach>
 				</div>
 				<!-- If we need navigation buttons -->

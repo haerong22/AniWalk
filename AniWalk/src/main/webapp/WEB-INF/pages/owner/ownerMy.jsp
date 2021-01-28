@@ -63,34 +63,34 @@
 					<!-- Slides -->			 
 					<c:forEach items="${joinDtos}" var="joinDto">
 					<c:if test="${joinDto.dog_name ne null}">
-					<div class="swiper-slide">
-						<div class="mydog-item">
-							<div class="mydog-name">${joinDto.dog_name}</div>
-							<div class="mydog-info-part">
-								<img class="img-thumbnail" src="/owner/${joinDto.dog_image}" alt="">
-								<ul>
-									<li class="first">
-										<label>견종</label>
-										<span>${joinDto.dog_type}</span>
-									</li>
-									<li>
-										<label>생일</label>
-										<span class="dog-birth">${joinDto.dog_birth}</span>
-									</li>
-									<li>
-										<label>정보</label>
-										<span class="text-area">
-											${joinDto.dog_info}
-										</span>
-									</li>
-								</ul>
-								<div class="mydog-btn">
-									<button type="button" class="btn btn-primary mydog-update-btn" value="${joinDto.dog_id}">수정</button>
-									<button type="button" class="btn btn-danger mydog-del-btn" value="${joinDto.dog_id}">삭제</button>
+						<div class="swiper-slide">
+							<div class="mydog-item">
+								<div class="mydog-name">${joinDto.dog_name}</div>
+								<div class="mydog-info-part">
+									<img class="img-thumbnail" src="/owner/${joinDto.dog_image}" alt="">
+									<ul>
+										<li class="first">
+											<label>견종</label>
+											<span>${joinDto.dog_type}</span>
+										</li>
+										<li>
+											<label>생일</label>
+											<span class="dog-birth">${joinDto.dog_birth}</span>
+										</li>
+										<li>
+											<label>정보</label>
+											<span class="text-area">
+												${joinDto.dog_info}
+											</span>
+										</li>
+									</ul>
+									<div class="mydog-btn">
+										<button type="button" class="btn btn-primary mydog-update-btn" value="${joinDto.dog_id}">수정</button>
+										<button type="button" class="btn btn-danger mydog-del-btn" value="${joinDto.dog_id}">삭제</button>
+									</div>
 								</div>
 							</div>
 						</div>
-					</div>
 					</c:if>
 					</c:forEach>
 				</div>
