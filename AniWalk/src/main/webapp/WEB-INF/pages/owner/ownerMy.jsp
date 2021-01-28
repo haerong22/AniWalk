@@ -54,14 +54,15 @@
 	<section class="mydogs">
 		<div class="subtitle">
 			<h4>반려견 정보</h4>
-		</div>
-		<div class="mydogs-slider">
-			<!-- Slider main container -->
+		</div> 
+		<div class="mydogs-slider"> 
+			<!-- Slider main container -->		 
 			<div class="swiper-container">
-				<!-- Additional required wrapper -->
-				<div class="swiper-wrapper">
-					<!-- Slides -->
+				<!-- Additional required wrapper -->			 
+				<div class="swiper-wrapper"> 
+					<!-- Slides -->			 
 					<c:forEach items="${joinDtos}" var="joinDto">
+					<c:if test="${joinDto.dog_name ne null}">
 					<div class="swiper-slide">
 						<div class="mydog-item">
 							<div class="mydog-name">${joinDto.dog_name}</div>
@@ -90,15 +91,15 @@
 							</div>
 						</div>
 					</div>
+					</c:if>
 					</c:forEach>
 				</div>
 				<!-- If we need navigation buttons -->
+				  
 				<div class="swiper-button-prev"></div>
 				<div class="swiper-button-next"></div>
 			</div>
 		</div>
-
-
 
 		<div class="mydog-add">
 			<i class="far fa-plus-square"></i>

@@ -111,11 +111,6 @@ public class MemberDAOImpl implements MemberDAO {
 	}	
 	
 	@Override
-	public void delDogImg(String dog_id) {	
-		sqlSession.delete("kr.pandorabox.aniwalk.member.delDogImg", dog_id);
-	}
-	
-	@Override
 	public void delDog(String dog_id) {
 		sqlSession.update("kr.pandorabox.aniwalk.member.delDog", dog_id);
 	}

@@ -151,8 +151,7 @@ public class MemberServiceImpl implements MemberService {
 	
 	// 개 정보 삭제
 	@Override
-	public void delDog(String dog_id) {
-		memberDAO.delDogImg(dog_id);
+	public void delDog(String dog_id) {		
 		memberDAO.delDog(dog_id);	
 	}
 
