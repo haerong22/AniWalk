@@ -170,7 +170,6 @@ public class MemberController {
 		
 	@RequestMapping("/owner/delete.do")
 	public ModelAndView delDogInfo(HttpServletRequest req, String dog_id) {
-		System.out.println("del dog_id: " + dog_id);
 		ModelAndView mav = new ModelAndView();
 		memberService.delDog(dog_id);
 		mav.setViewName("redirect:/owner/my.do");
@@ -182,7 +181,7 @@ public class MemberController {
 		String mem_nickname = (String)req.getSession().getAttribute("mem_nickname");
 		String mem_phone = memberService.getPhone_number(mem_nickname);
 		String mem_profile = memberService.getProfile(mem_nickname);
-		System.out.println("유저 프로필 사진: " + mem_profile);
+		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("phone", mem_phone);
 		mav.addObject("mem_nickname", mem_nickname);

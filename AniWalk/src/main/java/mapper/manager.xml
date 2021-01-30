@@ -21,7 +21,7 @@
 	</select>
 	
 	<select id="userinfo" parameterType="String" resultType="joinMemberDogImage">
-		select m.mem_id, m.mem_nickname, m.kakao_id, d.dog_name, d.dog_type, d.dog_info, i.dog_image
+		select m.mem_id, m.mem_nickname, m.kakao_id, m.mem_phone, d.dog_name, d.dog_type, d.dog_info, i.dog_image
 			from ani_member m
 			join ani_dog d
 			on m.mem_id = d.mem_id

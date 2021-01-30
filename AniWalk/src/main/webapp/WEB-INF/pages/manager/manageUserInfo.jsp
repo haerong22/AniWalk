@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,7 +16,14 @@
     </div>
     <div class="info-content">
         <div class="left-box">
-            <img class="img-rounded" src="${pageContext.request.contextPath}/images/profile_test.png" alt="">
+        <c:set var="profile" value="${mem_profile}"/> 
+        <c:if test="${profile eq null}">
+        	<img class="img-rounded" src="${pageContext.request.contextPath}/images/profile_test.png" alt="">
+        </c:if>  
+        <c:if test="${profile ne null}">
+        	<img style="width: 200px;" id="userImg"
+										 src="/owner/${profile}" alt="" class="img-rounded">
+        </c:if>         				                     
             <ul>        
                 <li>
                     <label>닉네임 : </label>
@@ -41,27 +48,29 @@
         </div>
 
         <div class="right-box">
-            <h4>반려견 리스트</h4>
+            <h4>반려견 리스트</h4>       
             <c:forEach items="${userList}" var="userList">
-	            <div class="form-group">
-	                <img class="img-rounded" src="/owner/${userList.dog_image}" alt="">
-	                <ul>           	
-	                    <li>
-	                        <label>강아지이름</label>
-	                        <span>${userList.dog_name}</span>
-	                    </li>
-	                    <li>
-	                        <label>견종</label>
-	                        <span>${userList.dog_type}</span>
-	                    </li>
-	                    <li>
-	                        <label>강아지성격</label>
-	                        <div class="textarea-label">
-	                        	${userList.dog_info}
-	                        </div>
-	                    </li>            	
-	                </ul>
-	            </div>
+            	<c:if test="${userList.dog_name ne null}">
+		            <div class="form-group">
+		                <img class="img-rounded" src="/owner/${userList.dog_image}" alt="">
+		                <ul>           	
+		                    <li>
+		                        <label>강아지이름</label>
+		                        <span>${userList.dog_name}</span>
+		                    </li>
+		                    <li>
+		                        <label>견종</label>
+		                        <span>${userList.dog_type}</span>
+		                    </li>
+		                    <li>
+		                        <label>강아지성격</label>
+		                        <div class="textarea-label">
+		                        	${userList.dog_info}
+		                        </div>
+		                    </li>            	
+		                </ul>
+		            </div>
+	            </c:if>
             </c:forEach> 
         </div>
     </div>

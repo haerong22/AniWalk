@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.http.HttpRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,12 +11,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.pandorabox.aniwalk.member.JoinMemberDogImgDTO;
+import kr.pandorabox.aniwalk.member.MemberService;
 
 @Controller
 public class ManagerController {
 	
 	@Autowired
 	private ManagerService managerService;
+	@Autowired
+	private MemberService memberService;
 	
 	@RequestMapping("manager/index.do")
 	public String index(HttpServletRequest req) {
@@ -84,11 +86,11 @@ public class ManagerController {
 	
 	@RequestMapping("manager/userInfo.do")
 	public ModelAndView userInfo(String kakao_id) {
-		System.out.println("controller kakao_id: " + kakao_id);
-		
 		ModelAndView mav = new ModelAndView();
 		List<JoinMemberDogImgDTO> userList = managerService.userInfo(kakao_id);		
 		
+		String mem_profile = memberService.getProfile(userList.get(0).getMem_nickname());
+		mav.addObject("mem_profile", mem_profile);
 		mav.addObject("userList", userList);
 		mav.setViewName("manager/userInfo");	// manageUserInfo.jsp
 		return mav;
