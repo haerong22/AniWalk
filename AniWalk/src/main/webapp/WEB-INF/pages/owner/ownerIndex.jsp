@@ -15,7 +15,7 @@
 <body>
 <div class="active-list">
 	<img src="${pageContext.request.contextPath}/images/ownerindex.png" alt="" class="img-rounded" style="background: rgba(52, 152, 219, 0.6)">
-	<h2>오늘 <span>${fn:length(todayList) }</span>개의 산책일정이 있습니다.</h2>
+	<h2>오늘 <span>${fn:length(todayList)}</span>개의 산책일정이 있습니다.</h2>
 	<div class="list-part">
 		<c:forEach var="today" items="${todayList}">
 		<c:choose>

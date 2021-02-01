@@ -34,9 +34,12 @@
 				<span id="essential" class="glyphicon glyphicon-chevron-down"></span>
 			</li>
 			<li id="essential-content" class="hidden">
-				1. 목적 : 지원자 개인 식별, 지원의사 확인, 입사전형의 진행, 고지사항 전달, 입사 지원자와의 원활한 의사소통, 지원이력 확인 및 면접 불합격자 재지원 제한
-				2. 항목 : 아이디(이메일주소), 비밀번호, 이름, 생년월일, 휴대폰번호
-				3. 보유기간 : 회원 탈퇴 시까지 보유 (단, 지원이력 정보는 일방향 암호화하여 탈퇴일로부터 1년간 보관 후 파기합니다.)
+				1. 목적 : 지원자 개인 식별, 지원의사 확인, 입사전형의 진행, 고지사항 전달,
+				<br>&nbsp;&nbsp;&nbsp;&nbsp;입사 지원자와의 원활한 의사소통, 지원이력 확인 및 면접 불합격자 재지원 
+				<br>&nbsp;&nbsp;&nbsp;&nbsp;제한<br><br>
+				2. 항목 : 아이디(이메일주소), 비밀번호, 이름, 생년월일, 휴대폰번호<br><br>
+				3. 보유기간 : 회원 탈퇴 시까지 보유 (단, 지원이력 정보는 일방향 암호화하여 
+				<br>&nbsp;&nbsp;&nbsp;&nbsp;탈퇴일로부터 1년간 보관 후 파기합니다.)
 			</li>
 			<li>
 				<div class="choose-agree">
@@ -68,8 +71,7 @@
 			<li>
 				<input type="hidden" id="authResult" name="auth_pass">
 				<div class="unuse"></div>
-				<div class="auth-part">
-				</div>
+				<div class="auth-part"></div>
 			</li>
 			<li>
 				<label>생년월일</label>
@@ -150,7 +152,6 @@
 	        alert(emailError);
 	    } else {
 	    	$.get('/aniwalk/walker/emailCheck.do?email=' + emailCheck.value, data => {
-				console.log(data);
 				emailCheckResult.innerText = data == 'y' ? '사용 가능한 이메일 입니다.' : '이미 사용중인 이메일 입니다.';
 			})
 	    }
@@ -163,7 +164,7 @@
     	var maxSize = 209715200;
     	var files = e.target.files;  	
     	var filesArr = Array.prototype.slice.call(files);
-    	console.log('안녕');
+
     	if(files.length == 0){
     		$('#wk_img').attr('src', '${pageContext.request.contextPath}/images/main_logo.png' );
     	} else if(files.length > 3) {
@@ -177,8 +178,7 @@
         		} else if(!f.type.match("image.*")) {
         			alert("사진과 동영상만 업로드 가능합니다!");
         			
-        		} else {
-            		console.log(URL.createObjectURL(e.target.files[0]));
+        		} else {          		
         			$('#wk_img').attr('src', URL.createObjectURL(e.target.files[0]));
         		}
         	});
@@ -205,7 +205,6 @@
 		var area = ["강원도", "경기도", "경상남도", "경상북도", "광주광역시", "대구광역시",
 			"대전광역시", "부산광역시", "서울특별시", "세종특별자치시", "울산광역시", "인천광역시",
 			"전라남도", "전라북도", "제주특별자치도", "충청남도", "충청북도"]
-		console.log(area.length);
 		for(var i=0; i<area.length; i++){
 			$('#area').append("<option>" + area[i] + "</option>");
 		}
@@ -218,7 +217,6 @@
 					"area" : $('#area').val()
 				},
 				success:function(data){
-					console.log(data);
 					$('#city').empty();
 					$('#city').append("<option>선택하세요</option>");
 					for(var i=0; i<data.length; i++){
@@ -297,7 +295,6 @@ $(document).ready(function(){
 				"phoneNum" : $('#phoneNum').val()
 			},
 			success:function(data){
-				console.log('data: ' + data);
 				if(data === ''){
 					addPhoneAuthForm();
 					if(addPhoneAuthForm()){
@@ -311,9 +308,7 @@ $(document).ready(function(){
 								"wk_phone" : $('#phoneNum').val()
 							},
 							success:function(data){
-								console.log('data: ' + data);
 								var auth_num = $('#auth_num').val(data);
-								console.log('auth_num: ' + auth_num);
 								$('.auth').val(data)
 							},
 							error:function(a,b,c){

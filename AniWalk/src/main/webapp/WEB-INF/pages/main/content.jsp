@@ -52,11 +52,11 @@
 		          var kakao_access_token = authObj.access_token;	       		          		          	      
 
 			      // loginPro 컨트롤러를 호출하면서 데이터들을 보내준다.    			
-		          location.href="loginPro.do?kakao_id="+ kakao_id + "&nickname=" + nickname 
-		          	+ "&profile_img=" + profile_img
+		          location.href="loginPro.do?kakao_id="+ kakao_id + "&nickname=" + nickname; 
+		          	/*+ "&profile_img=" + profile_img
 	           		+ "&connected_time=" + connected_time + "&email=" + email + "&phone_number=" 
 	           		+ phone_number + "&gender="+ gender 
-	           		+"&kakao_access_token=" + kakao_access_token;
+	           		+"&kakao_access_token=" + kakao_access_token;*/
 		          
 		        },
 		        fail: function(error) {

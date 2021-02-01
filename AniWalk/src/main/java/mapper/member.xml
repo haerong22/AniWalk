@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.pandorabox.aniwalk.member">
 	
-	<select id="check" parameterType="int" resultType="String">
+	<select id="joinCheck" parameterType="int" resultType="String">
 		select mem_nickname from ani_member where kakao_id = #{kakao_id}
 	</select>
 

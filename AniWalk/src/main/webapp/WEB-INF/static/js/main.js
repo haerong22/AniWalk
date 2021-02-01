@@ -9,11 +9,11 @@ const phoneInputError = `
         <div class="text-danger">핸드폰번호를 제대로 입력해주세요</div>
     `;
 
-const check_num = /[0-9]/;                  // 숫자
-const check_eng = /[a-zA-Z]/;               // 문자
-const check_spc = /[~!@#$%^&*()_+|<>?:{}]/; // 특수문자
-const check_kor = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/;      // 한글체크
-const check_minWord = /[ㄱ-ㅎ|ㅏ-ㅣ]/;           // 모음, 자음 체크
+const check_num = /[0-9]/;                  	// 숫자
+const check_eng = /[a-zA-Z]/;               	// 문자
+const check_spc = /[\W]/; 						// 특수문자
+const check_kor = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/;      		// 한글체크
+const check_minWord = /[ㄱ-ㅎ|ㅏ-ㅣ]/;           	// 모음, 자음 체크
 
 const check_email = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;       //이메일 정규식
 const check_passwd = /^(?=.*\d)(?=.*[a-zA-Z])[0-9a-zA-Z]{8,10}$/;                   //  8 ~ 10자 영문, 숫자 조합     비밀번호 정규식
@@ -77,6 +77,8 @@ addPhoneAuthForm = function() {
     const inputPhoneNum = document.getElementById('phoneNum');
   
     let phoneNum = inputPhoneNum.value.split(''); 
+    console.log(phoneNum);
+    console.log(phoneNum.length);
     let minusError = 0;
     for(let i=0; i<phoneNum.length; i++){
         if(phoneNum[i] === '-'){
@@ -96,7 +98,7 @@ addPhoneAuthForm = function() {
     }
     else{
         authPart.innerHTML = addForm;
-        unuse.innerHTML = '';
+        //unuse.innerHTML = '';
         return true;
     }
 }

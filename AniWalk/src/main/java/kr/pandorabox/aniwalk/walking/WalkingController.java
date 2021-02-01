@@ -203,7 +203,7 @@ public class WalkingController {
 		map.put("mem_nickname", mem_nickname);
 		map.put("walk_date", walk_date);
 		
-		List<WalkingDTO> todayList =walkingService.todayWalking(map);
+		List<WalkingDTO> todayList = walkingService.todayWalking(map);
 		mav.addObject("filename", filename);
 		mav.addObject("todayList", todayList);
 		mav.setViewName("owner/index");
