@@ -11,7 +11,7 @@ const phoneInputError = `
 
 const check_num = /[0-9]/;                  	// 숫자
 const check_eng = /[a-zA-Z]/;               	// 문자
-const check_spc = /[\W]/; 						// 특수문자
+const check_spc = /[\W][^ㄱ-ㅎ][^가-힣]/; 						// 특수문자
 const check_kor = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/;      		// 한글체크
 const check_minWord = /[ㄱ-ㅎ|ㅏ-ㅣ]/;           	// 모음, 자음 체크
 

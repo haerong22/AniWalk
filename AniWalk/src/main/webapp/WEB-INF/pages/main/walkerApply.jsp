@@ -158,8 +158,7 @@
 	});
 	
 	// profile 사진 
-	$('#wk_profile').on('change', function(e){		
-		
+	$('#wk_profile').on('change', function(e){				
 		var cnt = 0;
     	var maxSize = 209715200;
     	var files = e.target.files;  	
@@ -299,7 +298,7 @@ $(document).ready(function(){
 					addPhoneAuthForm();
 					if(addPhoneAuthForm()){
 						$('#phoneNum').attr("readonly", "readonly");
-						$('.auth-phone').empty();
+						//$('.auth-phone').empty();
 						$('#auth-btn').val('인증번호 다시받기');
 						$.ajax({
 							url:"/aniwalk/walker/auth.do",
