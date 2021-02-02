@@ -57,6 +57,7 @@
 }
 .terms__list li i{
 	margin-right: 10px;
+	cursor: pointer;
 }
 .terms__list li label, .terms__list li span{
 	cursor: pointer;

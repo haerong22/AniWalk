@@ -38,6 +38,7 @@ public class WalkerController {
 	@RequestMapping(value = "/walker/emailCheck.do",
 			method = RequestMethod.GET)
 	public String emailCheck(String email) {
+		System.out.println("워커 가입_이메일: " + email);		
 		int result = walkerService.emailCheck(email);
 		return result == 0 ? "y" : "n";
 	}

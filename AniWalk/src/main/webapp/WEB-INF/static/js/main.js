@@ -11,10 +11,13 @@ const phoneInputError = `
 
 const check_num = /[0-9]/;                  	// 숫자
 const check_eng = /[a-zA-Z]/;               	// 문자
-const check_spc = /[~!@#$%^&*()_+|<>?:{}]/;			// 특수문자
+const check_spc = /[~!@#$%^&*()_+|<>?:{}]/;		// 특수문자
 const check_kor = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/;      		// 한글체크
 const check_minWord = /[ㄱ-ㅎ|ㅏ-ㅣ]/;           	// 모음, 자음 체크
-
+const check_naver = /@\bnaver\b/;
+const check_gmail = /@\bgmail\b/;
+const check_daum = /@\bhanmail\b/;
+let regEmailArrays = [check_naver, check_gmail, check_daum];
 const check_email = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;       //이메일 정규식
 const check_passwd = /^(?=.*\d)(?=.*[a-zA-Z])[0-9a-zA-Z]{8,10}$/;                   //  8 ~ 10자 영문, 숫자 조합     비밀번호 정규식
 
@@ -32,10 +35,18 @@ applyCheck =  function(){
         alert(nameError);
         return false;
     }
-    if(! check_email.test(wkEmailValue)){
+    
+	let check_mailCoper = regEmailArrays.filter(regEmailArrays => regEmailArrays.test(wkEmailValue) == true);
+	if(check_mailCoper.length == 0) {
+		alert('naver, gmail, hanmail 메일 사용가능합니다.');
+		return false;
+	}
+	
+	if(!check_email.test(wkEmailValue)) {
         alert(emailError);
         return false;
-    }
+	}  
+    
     if(applyForm1.auth_pass.value !== 'auth-pass'){
         alert(phoneAuthPassError);
         return false;
@@ -77,8 +88,6 @@ addPhoneAuthForm = function() {
     const inputPhoneNum = document.getElementById('phoneNum');
   
     let phoneNum = inputPhoneNum.value.split(''); 
-    console.log(phoneNum);
-    console.log(phoneNum.length);
     let minusError = 0;
     for(let i=0; i<phoneNum.length; i++){
         if(phoneNum[i] === '-'){
@@ -98,13 +107,13 @@ addPhoneAuthForm = function() {
     }
     else{
         authPart.innerHTML = addForm;
-        //unuse.innerHTML = '';
+        unuse.innerHTML = '';
         return true;
     }
 }
 
 //작성한 핸드폰 번호가 사용중인 번호일 때 호출
-phoneUnusable = function(){
+phoneUnusable = function() {
     const unuse = document.querySelector('.unuse');
     const authPart = document.querySelector('.auth-part');
 

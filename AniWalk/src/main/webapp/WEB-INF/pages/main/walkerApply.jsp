@@ -148,12 +148,17 @@
 	const emailCheckBtn = document.getElementById("email-btn");
 	const emailCheckResult = document.getElementById("emailCheck");
 	emailCheckBtn.addEventListener('click', () => {
-		if(! check_email.test(emailCheck.value)) {
+		if(!check_email.test(emailCheck.value)) {
 	        alert(emailError);
 	    } else {
-	    	$.get('/aniwalk/walker/emailCheck.do?email=' + emailCheck.value, data => {
-				emailCheckResult.innerText = data == 'y' ? '사용 가능한 이메일 입니다.' : '이미 사용중인 이메일 입니다.';
-			})
+	    	$.ajax({
+				url: '/aniwalk/walker/emailCheck.do',
+				type: 'get',
+				data: {'email': emailCheck.value},
+				success: function(data) {
+					emailCheckResult.innerText = data == 'y' ? '사용 가능한 이메일 입니다.' : '이미 사용중인 이메일 입니다.';
+				}
+		    });
 	    }
 	});
 	
@@ -239,10 +244,10 @@
 	const chooseClick = document.getElementById('choose');
 	const chooseContent = document.getElementById('choose-content');
 
-	ynCheck = () =>{
+	ynCheck = () => {
 		if($('.essential-agree').hasClass('agree')){
 			$('#essentialAgreeYn').val('Yes');
-		}else {
+		} else {
 			$('#essentialAgreeYn').val('');
 		}
 	}
@@ -258,13 +263,13 @@
 
 	essentialClick.addEventListener('click',function(){
 		essentialContent.classList.toggle('hidden');
-		essentialClick.classList.toggle('glyphicon-chevron-down');
-		essentialClick.classList.toggle('glyphicon-chevron-up');
+		/*essentialClick.classList.toggle('glyphicon-chevron-down');
+		essentialClick.classList.toggle('glyphicon-chevron-up');*/
 	});
 	chooseClick.addEventListener('click',function(){
 		chooseContent.classList.toggle('hidden');
-		chooseContent.classList.toggle('glyphicon-chevron-down');
-		chooseContent.classList.toggle('glyphicon-chevron-up');
+		/*chooseContent.classList.toggle('glyphicon-chevron-down');
+		chooseContent.classList.toggle('glyphicon-chevron-up');*/
 	});
 
 	const allAgree = document.querySelector('.all-agree');
@@ -350,7 +355,7 @@ $(document).ready(function(){
 </script>
 </body>
 <style>
-	.agree{
+	.agree {
 		color: blue;
 	}
 </style>
