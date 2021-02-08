@@ -61,6 +61,7 @@ public class WalkerServiceImpl implements WalkerService {
 		MultipartFile[] profile_imgs = walker.getWk_profile_imgs();
 		ArrayList<String> filelist = new ArrayList<String>();
 		ArrayList<String> profileImgList = new ArrayList<String>();
+		
 		String path = "C:/walker";
 		for(int i=0; i<certifications.length; i++) {
 			String fileName = certifications[i].getOriginalFilename();
@@ -69,16 +70,18 @@ public class WalkerServiceImpl implements WalkerService {
 				filelist.add(new_file);
 			}
 		}
+		
 		for(int i=0; i<profile_imgs.length; i++) {
 			String fileName = "profile" + profile_imgs[i].getOriginalFilename();
 			String new_file = uploadService.upload(profile_imgs[i], path, fileName);
 			profileImgList.add(new_file);
 		}
+		
 		switch(profileImgList.size()) {
-		case 3: walker.setWk_profile_img3(profileImgList.get(2));
-		case 2: walker.setWk_profile_img2(profileImgList.get(1));
-		case 1: walker.setWk_profile_img1(profileImgList.get(0));
-		default: break;
+			case 3: walker.setWk_profile_img3(profileImgList.get(2));
+			case 2: walker.setWk_profile_img2(profileImgList.get(1));
+			case 1: walker.setWk_profile_img1(profileImgList.get(0));
+			default: break;
 		}
 		
 		int result = 0;

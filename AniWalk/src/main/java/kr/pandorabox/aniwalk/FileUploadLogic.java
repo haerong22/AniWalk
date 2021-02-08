@@ -34,9 +34,12 @@ public class FileUploadLogic {
 			fos.write(data);
 		} catch (IOException e) {
 			e.printStackTrace();
-		} finally {
-			try {
-				if(fos!=null)fos.close();
+		} finally {		
+			try {		
+				if(fos!=null) {
+					fos.flush();
+					fos.close();
+				}
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
