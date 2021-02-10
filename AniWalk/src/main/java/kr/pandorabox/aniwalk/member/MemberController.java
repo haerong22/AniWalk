@@ -93,7 +93,6 @@ public class MemberController {
 			method = RequestMethod.POST,
 			produces = "application/text;charset=utf-8")
 	public String auth(String wk_phone) {
-		System.out.println("인증시 입력한 핸드폰 번호: " + wk_phone);
 		Random ran = new Random();	
 	    String auth = Integer.toString(ran.nextInt(899999) + 100000); 
 	    System.out.println("인증번호: " + auth);

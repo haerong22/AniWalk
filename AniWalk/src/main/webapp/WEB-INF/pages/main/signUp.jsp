@@ -82,6 +82,8 @@
 							<select class="form-control" name="dog_type" required>
 								<option value="" selected>견종</option>
 								<option>포메라니안</option>
+								<option>골든리트리버</option>
+								<option>레브라도리트리버</option>
 								<option>폼피츠</option>
 								<option>사모예드</option>
 								<option>진돗개</option>
@@ -242,7 +244,7 @@ $(document).ready(function(){
 <script>
 
 	function auth(){
-		alert($('.auth').val());
+		//alert($('.auth').val());
 		$.ajax({
 			url:"/aniwalk/member/authNum.do",
 			type:"post",

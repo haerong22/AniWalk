@@ -81,7 +81,7 @@ addPhoneAuthForm = function() {
     const addForm = `
         <form id="authForm" style="display: flex; justify-content: space-around; margin-top: 10px;">
             <label>인증번호</label>
-            <input class="auth form-control" style="width: 65%;">
+            <input type= "input" class="auth form-control" style="width: 65%;">
             <button onclick="auth()" id="authNum" type="button" class="btn btn-primary">인증번호입력</button>
         </form>
     `;

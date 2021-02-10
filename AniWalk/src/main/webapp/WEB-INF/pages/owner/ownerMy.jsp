@@ -156,12 +156,13 @@
 							<select class="form-control" name="dog_type">
 								<option value="" selected>견종</option>
 								<option>포메라니안</option>
-								<option>말티즈</option>
+								<option>골든리트리버</option>
+								<option>레브라도리트리버</option>
 								<option>폼피츠</option>
 								<option>사모예드</option>
-								<option>푸들</option>
 								<option>진돗개</option>
-								<option>리트리버</option>
+								<option>푸들</option>
+								<option>말티즈</option>
 							</select>
 						</li>
 						<li>
@@ -207,12 +208,13 @@
 							<select class="form-control" name="dog_type">
 								<option value="" selected>견종</option>
 								<option>포메라니안</option>
-								<option>말티즈</option>
+								<option>골든리트리버</option>
+								<option>레브라도리트리버</option>
 								<option>폼피츠</option>
 								<option>사모예드</option>
-								<option>푸들</option>
 								<option>진돗개</option>
-								<option>리트리버</option>
+								<option>푸들</option>
+								<option>말티즈</option>
 							</select>
 						</li>
 						<li class="modify_modal_birth">

@@ -228,6 +228,8 @@ function searchAddr(){
 	var addr = document.getElementById('addr').value
 	geocoder.addressSearch(addr, function(result, status) {
 	    // 정상적으로 검색이 완료됐으면 
+	    console.log('result: ' + result);
+	    console.log('addr: ' + status);
 	     if (status === kakao.maps.services.Status.OK) {
 	        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
 	        coord2Address(coords);
