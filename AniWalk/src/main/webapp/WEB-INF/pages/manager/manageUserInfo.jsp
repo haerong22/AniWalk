@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,7 +32,11 @@
                 </li>
                 <li>
                     <label>핸드폰 : </label>
-                    <span>${userList[0].mem_phone}</span>
+                    <span>
+						${fn:substring(userList[0].mem_phone, 0, 3)}
+                    	- ${fn:substring(userList[0].mem_phone, 3, 7)}
+                    	- ${fn:substring(userList[0].mem_phone, 7, 11)} 
+					</span>
                 </li>
                 <li>
                     <label>주소 : </label>

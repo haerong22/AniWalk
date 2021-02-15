@@ -23,23 +23,32 @@
             <img class="img-rounded" src="/walker/${walkerInfo[0].wk_profile_img1}" alt="">
             <ul>
                 <li>
-                    <label>신청자</label>
+                    <label>신청자:</label>
                     <span>${walkerInfo[0].wk_name}</span>
                 </li>
                 <li>
-                    <label>생년월일</label>
+                    <label>생년월일:</label>
                     <span>${fn:substring(walkerInfo[0].wk_birth, 0, 10)}</span>
                 </li>
+                <!--  
                 <li>
                     <label>핸드폰</label>
                     <span>${walkerInfo[0].wk_phone}</span>
-                </li>
+                </li> -->
+                <li>
+                	<label>핸드폰:</label>
+                    <span>
+                    	${fn:substring(walkerInfo[0].wk_phone, 0, 3)}
+                    	- ${fn:substring(walkerInfo[0].wk_phone, 3, 7)}
+                    	- ${fn:substring(walkerInfo[0].wk_phone, 7, 11)} 
+                    </span>
+                </li>           
                 <li>
                     <label>거주지</label>
                     <span style="display:block;">${walkerInfo[0].wk_addr}</span>
                 </li>
                 <li>
-                    <label>이메일</label>
+                    <label>이메일:</label>
                     <span id="applierEmail">${walkerInfo[0].wk_email}</span>
                 </li>
                 <c:if test="${walkerInfo[0].apply_state eq 4}">
