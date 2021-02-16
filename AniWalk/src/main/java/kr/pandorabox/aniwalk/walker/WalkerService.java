@@ -16,7 +16,7 @@ public interface WalkerService {
 	public WalkerDTO myInfo(String walker_id);
 	public int myInfoUpdate(WalkerDTO walker);
 	public int updateWalker(WalkerDTO walkerDto);
-	public int createWakerId(WalkerDTO walkerDto);
+	public int createWalkerId(WalkerDTO walkerDto);
 	public List<String> certificateImg(String wk_id);
 	public List<WalkerDTO> getWalkerList(String searchWalker);
 	public int emailCheck(String email);

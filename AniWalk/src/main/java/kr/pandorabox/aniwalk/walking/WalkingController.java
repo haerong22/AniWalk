@@ -143,10 +143,9 @@ public class WalkingController {
 	public ModelAndView recruit(HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView();
 		String mem_nickname = (String) request.getSession().getAttribute("mem_nickname");
-		//String filename = memberService.getProfile(mem_nickname);
 		List<WalkingDTO> walkingDtos = walkingService.recruitDog(mem_nickname);
 		String recruit_mem_id = walkingDtos.get(0).getMem_id();
-		//mav.addObject("filename", filename);
+		
 		mav.addObject("recruit_mem_id",recruit_mem_id);
 		mav.addObject("walkingDtos", walkingDtos);
 		mav.setViewName("owner/recruit");	// owner/ownerRecruit.jsp

@@ -39,6 +39,7 @@ public class WalkerDAOImpl implements WalkerDAO{
 	// 펫 프렌즈 신청 관리
 	@Override
 	public int updateWalker(WalkerDTO walkerDto) {
+		System.out.println("확인: " + walkerDto.getWk_certificate_list());
 		return session.update("kr.pandorabox.aniwalk.walker.updateWalker", walkerDto);
 	}
 	

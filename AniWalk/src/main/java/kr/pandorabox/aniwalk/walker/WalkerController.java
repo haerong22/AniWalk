@@ -46,7 +46,7 @@ public class WalkerController {
 	// 펫 프렌즈 신청 관리
 	@RequestMapping("/manager/updateWalker.do")
 	public String UpdateWalker(WalkerDTO walkerDto) {
-		int result = walkerService.updateWalker(walkerDto);
+		walkerService.updateWalker(walkerDto);
 		return "redirect:/manager/walkerInfo.do?wk_id="+walkerDto.getWk_id();
 	}
 	
@@ -56,7 +56,8 @@ public class WalkerController {
 			method = RequestMethod.POST,
 			produces = "application/text;charset=utf-8")
 	public String CreateWalkerId(WalkerDTO walkerDto) {
-		int result = walkerService.createWakerId(walkerDto);
+		System.out.println(walkerDto.getWalker_id());
+		int result = walkerService.createWalkerId(walkerDto);
 		if(result == 1) {
 			return "success";
 		}
@@ -77,14 +78,13 @@ public class WalkerController {
 	// owner페이지  펫 프렌즈 상세 정보
 	@RequestMapping("owner/walkerInfo.do")
 	public ModelAndView ownerWalkerInfo(String wk_id, HttpServletRequest req) {
-		String mem_nickname = (String)req.getSession().getAttribute("mem_nickname");
-		System.out.println(mem_nickname);
 		ModelAndView mav = new ModelAndView();
 		List<WalkerDTO> walkerInfo = walkerService.applierList(wk_id);
 		List<ReviewDTO> reviewList = reviewService.getWalkerReviewList(wk_id);
 	
 		double total = reviewList.size() == 0 ? 0 : reviewList.stream()
 				.mapToInt(review -> Integer.parseInt(review.getReview_score())).sum()/(double) reviewList.size();
+		System.out.println("평균: " + total);
 		total = Math.round(total*10)/10.0;
 		mav.setViewName("owner/walkerInfo");	// ownerWalkerInfo.jsp
 		mav.addObject("reviewList", reviewList);
@@ -126,7 +126,7 @@ public class WalkerController {
 		ModelAndView mav = new ModelAndView();
 		List<WalkerDTO> walkerInfo = walkerService.applierList(wk_id);
 		List<String> certificateImg = walkerService.certificateImg(wk_id); 
-		mav.setViewName("manager/walkerInfo");
+		mav.setViewName("manager/walkerInfo");		// pages/manager/manageApplierInfo.jsp
 		mav.addObject("walkerInfo", walkerInfo);
 		mav.addObject("certificateImg", certificateImg);
 		return mav;
@@ -135,7 +135,6 @@ public class WalkerController {
 	// 펫 프렌즈 리스트
 	@RequestMapping("manager/walker.do")
 	public ModelAndView ApplierList(String wk_id, HttpServletRequest req) {
-		System.out.println("wk_id: " + wk_id);
 		
 		if(req.getSession().getAttribute("manager_id") == null) {
 			ModelAndView mav = new ModelAndView();

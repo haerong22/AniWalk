@@ -100,7 +100,7 @@
 	                </li>
 	                <li>
 	                    <label>활동지역</label>
-	                    <span>${walkerInfo[0].wk_location1} / ${walkerInfo[0].wk_location2}</span>
+	                    <span>${walkerInfo[0].wk_location1} <!-- / ${walkerInfo[0].wk_location2} --></span>
 	                </li>
 	                <li>
 	                    <label>활동상태</label>
@@ -135,17 +135,20 @@
                 		<button id='cert-btn' class="btn btn-success" type="button">등록</button>
                 	</div>
                 </li>
-                <li>
+                <li>                                                                              
 					<label>자격증 리스트</label>                
                 	<ol id='cert-list'>
                 		<c:set var="wk_certificate_list" value="${fn:split(walkerInfo[0].wk_certificate_list,'/')}"/>
                 		<c:forEach var="certi" items="${wk_certificate_list}">
                 			<c:if test="${certi != ''}">
-                				<li>${certi}	<input onclick="delCert(this)" class="btn btn-light" type="button" value='삭제'></li>
+                				<li>
+                					${certi}	
+                					<input onclick="delCert(this)" class="btn btn-light" type="button" value='삭제'>
+                				</li>
                 			</c:if>
                 		</c:forEach>
                 	</ol>
-                </li>
+                </li>                                                                                
             </ul>
             <input type="hidden" name="wk_certificate_list" id="wk_certificate_list">
             <div class="btn-line">
@@ -188,27 +191,29 @@
 		for(var i=1;i<=$('#cert-list li').length; i++) {
 			wk_certificate_list += $('#cert-list > li:nth-child('+ (i) +')').text() + '/';
 		}
+		console.log("확인: " + wk_certificate_list );
 		$('#wk_certificate_list').val(wk_certificate_list);
 	}
 
 	function certName(){
 		if(event.keyCode == 13 && $('#cert-name').val() != '') {
-			$('#cert-list').append('<li>'+ $('#cert-name').val() + '	<input onclick="delCert(this)" class="btn btn-light" type="button" value="삭제"></li>');
+			$('#cert-list').append('<li>'+ $('#cert-name').val() + '<input onclick="delCert(this)" class="btn btn-light" type="button" value="삭제"></li>');
 			$('#cert-name').val('');
 			wk_certificate_list();
 		}
 	}
 	$('#cert-btn').on('click', function(){
 		if($('#cert-name').val() != ''){
-			$('#cert-list').append('<li>'+ $('#cert-name').val() + '	<input onclick="delCert(this)" class="btn btn-light" type="button" value="삭제"></li>');
+			$('#cert-list').append('<li>'+ $('#cert-name').val() + '<input onclick="delCert(this)" class="btn btn-light" type="button" value="삭제"></li>');
 			$('#cert-name').val('');
 			wk_certificate_list();
 		}
 	})
 	
 	function createWalkerIdAndPw(){
-    const walker_id = applierEmail.innerText;
-    const wk_pw = Math.random().toString(36).substr(2,6);
+	    const walker_id = applierEmail.innerText;
+	    const wk_pw = Math.random().toString(36).substr(2,6);
+	    
 	    $.ajax({
 	        url : '/aniwalk/manager/createWalkerId.do',	//이름 바꿔도됨
 	        type : 'post',
@@ -218,7 +223,7 @@
 	            "wk_id" : "${walkerInfo[0].wk_id}"
 	        },
 	        success : function(data) {
-	            if(data == 'success'){
+	            if(data == 'success') {
 	            	$('#walker_id').text(walker_id);
 	            	$('#walkerIdCreate').addClass('hidden');
 	            	$('#walkerPwIssue').removeClass('hidden');

@@ -30,7 +30,7 @@ public class WalkerServiceImpl implements WalkerService {
 	
 	// 펫 프렌즈 아이디 생성
 	@Override
-	public int createWakerId(WalkerDTO walkerDto) {
+	public int createWalkerId(WalkerDTO walkerDto) {
 		return walkerDao.createWalkerId(walkerDto);
 	}
 	
