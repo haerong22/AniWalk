@@ -81,7 +81,7 @@ public class WalkerController {
 		ModelAndView mav = new ModelAndView();
 		List<WalkerDTO> walkerInfo = walkerService.applierList(wk_id);
 		List<ReviewDTO> reviewList = reviewService.getWalkerReviewList(wk_id);
-	
+		
 		double total = reviewList.size() == 0 ? 0 : reviewList.stream()
 				.mapToInt(review -> Integer.parseInt(review.getReview_score())).sum()/(double) reviewList.size();
 		System.out.println("평균: " + total);

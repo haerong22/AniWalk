@@ -59,7 +59,7 @@ public class WalkingController {
 	public ModelAndView main(HttpServletRequest req) {
 		String walker_id = (String) req.getSession().getAttribute("walker_id");
 		List<WalkingDTO> walkingList = walkingService.getAllWalkingList(walker_id);
-		return new ModelAndView("walker/main", "walkingList", walkingList);
+		return new ModelAndView("walker/main", "walkingList", walkingList);		// pages/walker/walkerMain.jsp
 	}	
 	
 	@RequestMapping("/walker/recruit/detail.do")
@@ -135,7 +135,7 @@ public class WalkingController {
 		String wk_id = walkingService.wkId(walker_id);
 		mav.addObject("wk_id", wk_id);
 		mav.addObject("recruitList", list);
-		mav.setViewName("walker/recruitlist");
+		mav.setViewName("walker/recruitlist");		// walker/walkerRecruitList.jsp
 		return mav;
 	}
 	
@@ -165,7 +165,7 @@ public class WalkingController {
 		String filename = memberService.getProfile(mem_nickname);
 		List<WalkingDTO> walkingDtos= walkingService.recruitlist(mem_nickname);
 		mav.addObject("filename", filename);
-		mav.setViewName("owner/recruitList");
+		mav.setViewName("owner/recruitList");		// owner/ownerRecruitList.jsp
 		mav.addObject("mem_nickname", mem_nickname);
 		mav.addObject("walkingDtos", walkingDtos);
 		return mav;

@@ -122,7 +122,7 @@
 	</div>
 </div>
 
-<!-- 신청시 팝업 -->
+<!-- 신청시 팝업 -->  
 <div class="popup-bg hidden" >
 	<div class="popup-content" id="applyCheck" onclick="event.stopPropagation()">
 		<h3 style="text-align: center; margin-bottom: 50px;">신청하시겠습니까?</h3>
@@ -175,7 +175,7 @@
 	</c:forEach>
 
 	for(let i=0; i<applyBtn.length; i++){
-		applyBtn[i].addEventListener('click',function (){
+		applyBtn[i].addEventListener('click',function () {
 	
 			//워커가 이 신청글에 신청 했었는지
 			$.ajax({
@@ -197,17 +197,18 @@
 						$('#applyCheck').append(add);
 						sendRecruitId.value = this.value;
 					}else{ //신청 이력이 없는 경우
+						/*
 						var add='<h3 style="text-align: center; margin-bottom: 50px;">신청하시겠습니까?</h3>';
 						add += '<form class="recruit-apply-modal-form" action="/aniwalk/walker/walkingRecruit.do">';
 						add += '<input id="sendRecruitId" type="hidden" value="">';
 						add += '<input name="wk_id" id="wk_id" type="hidden" value="${wk_id}">';
 						add += '<input id="setWalking_id" name="walking_id" type="hidden" value="">';
 						add += '<button class="btn btn-primary" type="submit">신청</button>';
-						add += '<button class="btn btn-danger" type="button">취소</button></form>';
+						add += '<button class="btn btn-danger" type="button">취소</button></form>'; */
 						
 						popupBg.classList.remove('hidden');
-						$('#applyCheck').empty();
-						$('#applyCheck').append(add);
+						//$('#applyCheck').empty();
+						//$('#applyCheck').append(add);
 						
 						sendRecruitId.value = this.value;
 						console.log("Walking_id====>"+walkingList[i]);
@@ -218,9 +219,7 @@
 				error: function(a,b,c){ //ajax 실패시 원인
 					alert("에러"+c);00
 				}
-			})
-			
-
+			})			
 		});
 	}
 	popupBg.addEventListener('click',function (){

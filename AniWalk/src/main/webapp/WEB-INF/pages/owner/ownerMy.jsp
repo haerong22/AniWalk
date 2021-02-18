@@ -163,6 +163,7 @@
 								<option>진돗개</option>
 								<option>푸들</option>
 								<option>말티즈</option>
+								<option>비글</option>
 							</select>
 						</li>
 						<li>
@@ -215,6 +216,7 @@
 								<option>진돗개</option>
 								<option>푸들</option>
 								<option>말티즈</option>
+								<option>비글</option>
 							</select>
 						</li>
 						<li class="modify_modal_birth">
