@@ -4,24 +4,62 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="kr.pandorabox.aniwalk.walker">
+	<!-- 펫 프렌즈 신청 페이지 이메일 중복 확인 -->
+	<select id="emailCheck" parameterType="String" resultType="int">
+		select count(*) from ani_walker where wk_email=#{email}
+	</select>
+	<!-- 오너 페이지 - 펫 프렌즈 리스트 -->
+	<select id="getWalkerList" parameterType="String" resultType="walker">
+		select w.*, total, starcnt from ani_walker w left outer join
+		(select wk.match_wk_id, round(sum(to_number(review_score))/count(review_score), 1) total, 
+   		round((sum(to_number(review_score))/count(review_score) * 2)) starcnt
+		from ani_review r left outer join ani_walking wk
+		on r.walking_id = wk.walking_id
+		group by wk.match_wk_id) t
+		on w.wk_id = t.match_wk_id
+		where apply_state=4 and activity_state=1
+		<if test="value != null">
+			and (wk_name like '%'||#{value}||'%' 
+				or wk_location1 like '%'||#{value}||'%'
+				or wk_location2 like '%'||#{value}||'%')
+		</if>
+	</select>
+	
+	<!-- 펫 프렌즈 아이디 생성 -->
+	<update id="createWalkerId" parameterType="walker">
+		update ani_walker
+		set walker_id=#{walker_id}, wk_pw=#{wk_pw}
+		where wk_id=#{wk_id}
+	</update>
+
+	<!-- 펫 프렌즈 신청 관리 -->
+	<update id="updateWalker" parameterType="walker">
+		update ani_walker 
+		set wk_certificate_list=#{wk_certificate_list}
+		<if test="activity_state == 0">
+			,apply_state=#{apply_state}, activity_start_date=sysdate, activity_state=1
+			
+		</if> 
+		<if test="activity_state != 0">
+			,activity_state=#{activity_state}
+		</if>
+		where wk_id=#{wk_id}
+	</update>
+
 	<!-- 펫 프렌즈 신청 정보 insert -->
 	<insert id="walkerApply" parameterType="walker">
 		insert into ANI_Walker 
-		values('walker'||lpad(seq_walker.nextval,5,0), #{wk_name}, 'temp'||seq_walker.nextval, 
-			'temp'||seq_walker.nextval, #{wk_phone}, to_date(#{wk_birth}, 'YYYYMMDD'), #{wk_email}, #{wk_addr},
+		values('walker'||lpad(seq_walker.nextval,5,0), #{wk_name}, #{walker_id}, 
+		 	 #{wk_pw}, #{wk_phone}, to_date(#{wk_birth}, 'YYYYMMDD'), #{wk_email}, #{wk_addr},
 			 #{wk_profile_img1}, #{wk_profile_img2}, #{wk_profile_img3}, #{wk_event_agree}, 
-			 #{wk_location}, 0, sysdate, 1, sysdate, 0)
+			 #{wk_location1}, #{wk_location2}, #{wk_certificate_list}, #{wk_intro}, 0, sysdate, 1, sysdate, 0)
 	</insert> 
 	
 	<!-- 펫 프렌즈 자격증 insert -->
-	<insert id="fileinsert" parameterType="Map">
-		insert all
-		<foreach collection="filelist" item="file" separator=" ">
-			into ANI_Certificate 
-			values('certi'||lpad(seq_certificate.nextval,5,0),
+	<insert id="fileinsert" parameterType="String">
+		insert into ANI_Certificate 
+		values('certi'||lpad(seq_certificate.nextval,5,0),
 				'walker'||lpad(seq_walker.currval,5,0), #{file})
-		</foreach>
-		select * from dual
 	</insert>
 	
 	<!-- 펫프렌즈 신청 정보 List -->
@@ -30,6 +68,11 @@
 		<if test="wk_id != null">
 			where wk_id=#{wk_id}
 		</if>
+	</select>
+	
+	<!-- 펫 프렌즈 자격증 사진 리스트 -->
+	<select id="certificateImg" parameterType="String" resultType="String">
+		select certificate_img from ani_certificate where certificate_wk_id=#{wk_id}
 	</select>
 	
 	<!-- 워커 로그인 -->
@@ -51,11 +94,16 @@
 	
 	<select id="review" parameterType="String" resultType="walker">
 		select * from ani_review r 
-		left outer join ani_walker w
-		on r.wk_id = w.wk_id
-		left outer join ani_member m
-		on m.mem_id = r.mem_id
-		where w.walker_id = #{walker_id} 
+		left outer join ani_walking w
+		on r.walking_id = w.walking_id
+		where w.match_wk_id = (select wk_id from ani_walker where walker_id=#{walker_id})
 	</select>
 	
+	<select id="myInfo" parameterType="String" resultType="walker">
+		select * from ani_walker where walker_id = #{walker_id}
+	</select>
+	<update id="myInfoUpdate" parameterType="walker">
+		update ani_walker set wk_pw=#{wk_pw}, wk_location1=#{wk_location1}, wk_location2=#{wk_location2},
+		wk_intro=#{wk_intro}, activity_state=#{activity_state} where walker_id=#{walker_id}
+	</update>
 </mapper>

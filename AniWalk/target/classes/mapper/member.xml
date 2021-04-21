@@ -4,18 +4,18 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.pandorabox.aniwalk.member">
 	
-	<select id="check" parameterType="int" resultType="String">
+	<select id="joinCheck" parameterType="int" resultType="String">
 		select mem_nickname from ani_member where kakao_id = #{kakao_id}
 	</select>
 
 	<insert id="joinmember" parameterType="joinMemberDogImage">
-		insert into ani_member (mem_id, mem_nickname, kakao_id, mem_point, mem_profile_img) 
-		values('member'||lpad(seq_member.nextval,5,0), #{mem_nickname}, #{kakao_id}, #{mem_point}, #{mem_profile_img})
+		insert into ani_member (mem_id, mem_nickname, kakao_id, mem_point, mem_phone, mem_profile_img) 
+		values('member'||lpad(seq_member.nextval,5,0), #{mem_nickname}, #{kakao_id}, #{mem_point}, #{mem_phone}, #{mem_profile_img})
 	</insert>
 	
 	<insert id="joindog" parameterType="joinMemberDogImage">
-		insert into ani_dog (dog_id, dog_name, dog_type, dog_size, dog_info, dog_birth, mem_id) 
-		values('dog'||lpad(seq_dog.nextval,5,0), #{dog_name}, #{dog_type}, #{dog_size}, #{dog_info}, #{dog_birth}, 'member'||lpad(seq_member.currval,5,0))
+		insert into ani_dog (dog_id, dog_name, dog_type, dog_info, dog_birth, mem_id) 
+		values('dog'||lpad(seq_dog.nextval,5,0), #{dog_name}, #{dog_type}, #{dog_info}, to_date(#{dog_birth},'YYYY-MM-DD'), 'member'||lpad(seq_member.currval,5,0))
 	</insert>
 	
 	<insert id="fileinsert" parameterType="Map">
@@ -25,5 +25,86 @@
 		</foreach>
 		select * from dual
 	</insert>
-
+	
+	<select id="nicknameCheck" parameterType="String" resultType="int">
+		select count(*) from ani_member where mem_nickname=#{mem_nickname}
+	</select>
+ 	
+ 	<select id="phoneCheck" parameterType="String" resultType="String">
+ 		select mem_phone from ani_member where mem_phone=#{mem_phone}
+ 	</select>
+	
+	<select id="myPage" parameterType="String" resultType="joinMemberDogImage">
+		select * from ani_dog d 
+		left outer join ani_member m
+		on d.mem_id = m.mem_id
+		left outer join ani_dog_img i
+		on i.dog_id = d.dog_id
+		where mem_nickname=#{mem_nickname}
+	</select>
+	  
+	<select id="getMem_id" parameterType="String" resultType="String">
+		select mem_id from ani_member where mem_nickname=#{mem_nickname}
+	</select>
+	<!--  
+	<select id="getDog_id" parameterType="String" resultType="String">
+		select i.dog_id
+		from ani_member m
+		join ani_dog d
+		on m.mem_id = d.mem_id
+		join ani_dog_img i
+		on d.dog_id = i.dog_id
+		where m.mem_id = #{getForeign_Mem_id}
+	</select>
+	-->
+	<insert id="addDog" parameterType="joinMemberDogImage">
+		insert into ani_dog (dog_id, dog_name, dog_type, dog_info, dog_birth, mem_id) 
+		values('dog'||lpad(seq_dog.nextval,5,0), #{dog_name}, #{dog_type}, #{dog_info}, to_date(#{dog_birth},'YYYY-MM-DD'), #{mem_id})
+	</insert>
+	  
+	<insert id="addDogImg" parameterType="Map">
+		insert all
+		<foreach collection="filelist" item="file" separator=" ">
+			into ani_dog_img values ('dog_img'||lpad(seq_dog_img.nextval,5,0), #{file}, 'dog'||lpad(seq_dog.currval,5,0))
+		</foreach>
+		select * from dual
+	</insert>
+	
+	<select id="getPhone_num" parameterType="String" resultType="String">
+		select mem_phone from ani_member where mem_nickname=#{c}
+	</select>
+	
+	<update id="nickUpdate" parameterType="joinMemberDogImage">
+		update ani_member set mem_nickname=#{mem_nickname} where mem_nickname=#{owner_id}
+	</update>
+	
+	<update id="profileUpdate" parameterType="Map">
+		update ani_member set mem_profile_img = #{filelist} where mem_nickname=#{id}
+	</update>
+	
+	<select id="getProfile" parameterType="String" resultType="String">
+		select mem_profile_img from ani_member where mem_nickname=#{mem_nickname}
+	</select>
+	
+	<select id="getDogInfo" parameterType="Map" resultType="joinMemberDogImage">
+		select * from ani_dog d 
+		left outer join ani_member m
+		on d.mem_id = m.mem_id
+		left outer join ani_dog_img i
+		on i.dog_id = d.dog_id
+		where mem_nickname=#{mem_nickname} and d.dog_id=#{dog_id}
+	</select>
+	
+	<update id="modifyDogInfo" parameterType="joinMemberDogImage">
+		update ani_dog set dog_name=#{dog_name}, dog_type=#{dog_type}, dog_birth=#{dog_birth}, dog_info=#{dog_info}
+		where dog_id=#{dog_id}
+	</update>
+	
+	<update id="modifyDogProfile" parameterType="Map">
+		update ani_dog_img set dog_image=#{dog_profile} where dog_id=#{dog_id}
+	</update>
+	
+	<update id="delDog" parameterType="String">
+		update ani_dog set dog_name=null where dog_id=#{dog_id}
+	</update>
 </mapper>
